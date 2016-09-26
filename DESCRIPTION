@@ -1,6 +1,6 @@
 Package: leadershipdata
 Title: Coding of all HRAF data on leadership
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: person("Zachary", "Garfield", email = "zachary.garfield@wsu.edu", role = c("aut", "cre"))
 Description: insert Abstract
 Depends:
