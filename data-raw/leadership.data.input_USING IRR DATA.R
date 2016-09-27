@@ -339,7 +339,11 @@ d.ctPKG <- dplyr::select(d.ct,
 leader_text<-dplyr::select(d3,
                            cs_ID:c_subsistence_code,
                            demo_sex:prestige_respected,
-                           evidence_prestige_for:prest_totals)
+                           evidence_prestige_for:region2,
+                           dom_none,dom_sum,
+                           prestige_none,prestige_sum,
+                           neel_none,neel_sum,
+                           dom_totals,prest_totals)
 leader_cult<-d.ctPKG
 use_data(leader_text,leader_cult,overwrite=TRUE)
 

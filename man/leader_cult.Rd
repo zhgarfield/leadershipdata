@@ -7,62 +7,62 @@
 \format{A data frame with 59 rows and 68 variables:
 \describe{
   \item{\code{c_name}}{character. DESCRIPTION.}
-  \item{\code{neel_better.mates_present}}{double. DESCRIPTION.}
-  \item{\code{neel_big.family_present}}{double. DESCRIPTION.}
-  \item{\code{neel_intelligence_present}}{double. DESCRIPTION.}
-  \item{\code{neel_polygynous_present}}{double. DESCRIPTION.}
-  \item{\code{prestige_counsel_present}}{double. DESCRIPTION.}
-  \item{\code{prestige_emulated_present}}{double. DESCRIPTION.}
-  \item{\code{prestige_expertise_present}}{double. DESCRIPTION.}
-  \item{\code{prestige_family_present}}{double. DESCRIPTION.}
-  \item{\code{prestige_f.exp.success_present}}{double. DESCRIPTION.}
-  \item{\code{prestige_likable_present}}{double. DESCRIPTION.}
-  \item{\code{prestige_respected_present}}{double. DESCRIPTION.}
-  \item{\code{dom_aggression_present}}{double. DESCRIPTION.}
-  \item{\code{dom_assert.authority_present}}{double. DESCRIPTION.}
-  \item{\code{dom_avoid.dom_present}}{double. DESCRIPTION.}
-  \item{\code{dom_fear_present}}{double. DESCRIPTION.}
-  \item{\code{dom_fighting_present}}{double. DESCRIPTION.}
-  \item{\code{dom_personality_present}}{double. DESCRIPTION.}
-  \item{\code{dom_reputation_present}}{double. DESCRIPTION.}
-  \item{\code{dom_strong_present}}{double. DESCRIPTION.}
-  \item{\code{neel_better.mates_mean}}{double. DESCRIPTION.}
-  \item{\code{neel_big.family_mean}}{double. DESCRIPTION.}
-  \item{\code{neel_intelligence_mean}}{double. DESCRIPTION.}
-  \item{\code{neel_polygynous_mean}}{double. DESCRIPTION.}
-  \item{\code{prestige_counsel_mean}}{double. DESCRIPTION.}
-  \item{\code{prestige_emulated_mean}}{double. DESCRIPTION.}
-  \item{\code{prestige_expertise_mean}}{double. DESCRIPTION.}
-  \item{\code{prestige_family_mean}}{double. DESCRIPTION.}
-  \item{\code{prestige_f.exp.success_mean}}{double. DESCRIPTION.}
-  \item{\code{prestige_likable_mean}}{double. DESCRIPTION.}
-  \item{\code{prestige_respected_mean}}{double. DESCRIPTION.}
-  \item{\code{dom_aggression_mean}}{double. DESCRIPTION.}
-  \item{\code{dom_assert.authority_mean}}{double. DESCRIPTION.}
-  \item{\code{dom_avoid.dom_mean}}{double. DESCRIPTION.}
-  \item{\code{dom_fear_mean}}{double. DESCRIPTION.}
-  \item{\code{dom_fighting_mean}}{double. DESCRIPTION.}
-  \item{\code{dom_personality_mean}}{double. DESCRIPTION.}
-  \item{\code{dom_reputation_mean}}{double. DESCRIPTION.}
-  \item{\code{dom_strong_mean}}{double. DESCRIPTION.}
-  \item{\code{c_culture_code}}{integer. DESCRIPTION.}
-  \item{\code{Location}}{integer. DESCRIPTION.}
-  \item{\code{Position}}{integer. DESCRIPTION.}
-  \item{\code{c_cultural_complexity}}{integer. DESCRIPTION.}
-  \item{\code{c_region}}{character. DESCRIPTION.}
-  \item{\code{c_subregion}}{character. DESCRIPTION.}
-  \item{\code{c_subsistence_code}}{integer. DESCRIPTION.}
-  \item{\code{c_subsistence_type}}{character. DESCRIPTION.}
-  \item{\code{extract_count}}{integer. DESCRIPTION.}
-  \item{\code{neel_total_cell_count}}{integer. DESCRIPTION.}
+  \item{\code{neel_better.mates_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+  \item{\code{neel_big.family_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+  \item{\code{neel_intelligence_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+  \item{\code{neel_polygynous_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+  \item{\code{prestige_counsel_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+  \item{\code{prestige_emulated_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+  \item{\code{prestige_expertise_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+  \item{\code{prestige_family_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+  \item{\code{prestige_f.exp.success_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+  \item{\code{prestige_likable_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+  \item{\code{prestige_respected_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+  \item{\code{dom_aggression_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+  \item{\code{dom_assert.authority_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+  \item{\code{dom_avoid.dom_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+  \item{\code{dom_fear_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+  \item{\code{dom_fighting_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+  \item{\code{dom_personality_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+  \item{\code{dom_reputation_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+  \item{\code{dom_strong_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+  \item{\code{neel_better.mates_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+  \item{\code{neel_big.family_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+  \item{\code{neel_intelligence_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+  \item{\code{neel_polygynous_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+  \item{\code{prestige_counsel_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+  \item{\code{prestige_emulated_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+  \item{\code{prestige_expertise_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+  \item{\code{prestige_family_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+  \item{\code{prestige_f.exp.success_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+  \item{\code{prestige_likable_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+  \item{\code{prestige_respected_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+  \item{\code{dom_aggression_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+  \item{\code{dom_assert.authority_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+  \item{\code{dom_avoid.dom_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+  \item{\code{dom_fear_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+  \item{\code{dom_fighting_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+  \item{\code{dom_personality_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+  \item{\code{dom_reputation_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+  \item{\code{dom_strong_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+  \item{\code{c_culture_code}}{integer. HRAF OWC culture code.}
+  \item{\code{Location}}{integer. Nation state which culture is located within}
+  \item{\code{Position}}{integer. Latitude longitude coordinates.}
+  \item{\code{c_cultural_complexity}}{integer. SCCS cultural complexity value (SCCS V158.1)}
+  \item{\code{c_region}}{character. HRAF region}
+  \item{\code{c_subregion}}{character. HRAF subregion}
+  \item{\code{c_subsistence_code}}{integer. Numeric code assigned to HRAF subsistence classification.}
+  \item{\code{c_subsistence_type}}{character. HRAF subsistence classification.}
+  \item{\code{extract_count}}{integer. Number of texts associated with culture.}
+  \item{\code{neel_total_cell_count}}{integer. Total number of cells associated with the neel model in the text x variable matrix for each culture. }
   \item{\code{neel_total_for}}{double. DESCRIPTION.}
   \item{\code{neel_total_none}}{double. DESCRIPTION.}
   \item{\code{neel_total_against}}{double. DESCRIPTION.}
-  \item{\code{prest_total_cell_count}}{integer. DESCRIPTION.}
+  \item{\code{prest_total_cell_count}}{integer. Total number of cells associated with the prestige model in the text x variable matrix for each culture.}
   \item{\code{prest_total_for}}{double. DESCRIPTION.}
   \item{\code{prest_total_none}}{double. DESCRIPTION.}
   \item{\code{prest_total_against}}{double. DESCRIPTION.}
-  \item{\code{dom_total_cell_count}}{integer. DESCRIPTION.}
+  \item{\code{dom_total_cell_count}}{integer. Total number of cells associated with the dominance model in the text x variable matrix for each culture.}
   \item{\code{dom_total_for}}{double. DESCRIPTION.}
   \item{\code{dom_total_none}}{double. DESCRIPTION.}
   \item{\code{dom_total_against}}{double. DESCRIPTION.}

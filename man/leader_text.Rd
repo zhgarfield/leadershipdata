@@ -35,28 +35,22 @@
   \item{\code{prestige_f.exp.success}}{double. Do followers have an expectation of success of the leader? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
   \item{\code{prestige_likable}}{double. Is the leader likable? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
   \item{\code{prestige_respected}}{double. Is the leader respected, admired, or held in high esteem? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
-  \item{\code{evidence_prestige_for}}{double. DESCRIPTION.}
-  \item{\code{evidence_prestige_against}}{double. DESCRIPTION.}
-  \item{\code{evidence_dom_for}}{double. DESCRIPTION.}
-  \item{\code{evidence_dom_against}}{double. DESCRIPTION.}
-  \item{\code{evidence_neel_for}}{double. DESCRIPTION.}
-  \item{\code{evidence_neel_against}}{double. DESCRIPTION.}
+  \item{\code{evidence_prestige_for}}{double. The sum of evidence for the prestige model, e.g., the number of prestige-model variables coded '1' for the codesheet.}
+  \item{\code{evidence_prestige_against}}{double. The sum of evidence against the prestige model, e.g., the number of prestige-model variables coded '-1' for the codesheet.}
+  \item{\code{evidence_dom_for}}{double. The sum of evidence for the dominance model, e.g., the number of dominance-model variables coded '1' for the codesheet.}
+  \item{\code{evidence_dom_against}}{double. The sum of evidence against the dominance model, e.g., the number of dominance-model variables coded '-1' for the codesheet.}
+  \item{\code{evidence_neel_for}}{double. The sum of evidence for the neel model, e.g., the number of neel-model variables coded '1' for the codesheet.}
+  \item{\code{evidence_neel_against}}{double. The sum of evidence against the neel model, e.g., the number of neel-model variables coded '-1' for the codesheet.}
   \item{\code{subsistence2}}{integer. Recoded HRAF subsistence classification with the value lables of: “hunter-gatherers”, “pastoralists”, “horticulturalists”, “agriculturalists”, and “other”}
-  \item{\code{region2}}{integer. DESCRIPTION.}
-  \item{\code{dom_for}}{double. DESCRIPTION.}
-  \item{\code{dom_against}}{double. DESCRIPTION.}
-  \item{\code{dom_none}}{double. DESCRIPTION.}
-  \item{\code{dom_sum}}{double. DESCRIPTION.}
-  \item{\code{prestige_for}}{double. DESCRIPTION.}
-  \item{\code{prestige_against}}{double. DESCRIPTION.}
-  \item{\code{prestige_none}}{double. DESCRIPTION.}
-  \item{\code{prestige_sum}}{double. DESCRIPTION.}
-  \item{\code{neel_for}}{double. DESCRIPTION.}
-  \item{\code{neel_against}}{double. DESCRIPTION.}
-  \item{\code{neel_none}}{double. DESCRIPTION.}
-  \item{\code{neel_sum}}{double. DESCRIPTION.}
-  \item{\code{dom_totals}}{double. DESCRIPTION.}
-  \item{\code{prest_totals}}{double. DESCRIPTION.}
+  \item{\code{region2}}{integer. SCCS region classification using the following value lables: "Africa", "Circum-Mediterranean", "East Eurasia", "Insular Pacific", "North America", "South America"}
+  \item{\code{dom_none}}{double. The number of dominance model variables providing no evidence from the codesheet.}
+  \item{\code{dom_sum}}{double. The number of dominance model variables that provide any evidence from that codesheet.}
+  \item{\code{prestige_none}}{double. The number of prestige model variables providing no evidence from the codesheet.}
+  \item{\code{prestige_sum}}{double. The number of prestige model variables that provide any evidence from that codesheet.}
+  \item{\code{neel_none}}{double. The number of neel model variables providing no evidence from the codesheet.}
+  \item{\code{neel_sum}}{double. The number of neel model variables that provide any evidence from that codesheet.}
+  \item{\code{dom_totals}}{double. The sum of all dominance model variables from that codesheet, e.g., '1's + '-1's.}
+  \item{\code{prest_totals}}{double. The sum of all prestige model variables from that codesheet, e.g., '1's + '-1's.}
 }}
 \source{
 \url{http://www.ehrafsite.info/}
