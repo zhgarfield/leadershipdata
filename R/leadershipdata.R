@@ -4,42 +4,42 @@
 #'
 #' @format A data frame with 1212 rows and 51 variables:
 #' \describe{
-#'   \item{\code{cs_ID}}{integer. DESCRIPTION.}
-#'   \item{\code{cs_textrec_ID}}{double. DESCRIPTION.}
-#'   \item{\code{text_type}}{integer. DESCRIPTION.}
-#'   \item{\code{c_culture_code}}{integer. DESCRIPTION.}
-#'   \item{\code{c_name}}{integer. DESCRIPTION.}
-#'   \item{\code{c_region}}{integer. DESCRIPTION.}
-#'   \item{\code{c_subregion}}{integer. DESCRIPTION.}
-#'   \item{\code{c_subsistence_type}}{integer. DESCRIPTION.}
-#'   \item{\code{c_subsistence_code}}{integer. DESCRIPTION.}
-#'   \item{\code{demo_sex}}{integer. DESCRIPTION.}
-#'   \item{\code{dom_aggression}}{double. DESCRIPTION.}
-#'   \item{\code{dom_assert.authority}}{double. DESCRIPTION.}
-#'   \item{\code{dom_avoid.dom}}{double. DESCRIPTION.}
-#'   \item{\code{dom_fear}}{double. DESCRIPTION.}
-#'   \item{\code{dom_fighting}}{double. DESCRIPTION.}
-#'   \item{\code{dom_personality}}{double. DESCRIPTION.}
-#'   \item{\code{dom_reputation}}{double. DESCRIPTION.}
-#'   \item{\code{dom_strong}}{double. DESCRIPTION.}
-#'   \item{\code{neel_better.mates}}{double. DESCRIPTION.}
-#'   \item{\code{neel_big.family}}{double. DESCRIPTION.}
-#'   \item{\code{neel_intelligence}}{double. DESCRIPTION.}
-#'   \item{\code{neel_polygynous}}{double. DESCRIPTION.}
-#'   \item{\code{prestige_counsel}}{double. DESCRIPTION.}
-#'   \item{\code{prestige_emulated}}{double. DESCRIPTION.}
-#'   \item{\code{prestige_expertise}}{double. DESCRIPTION.}
-#'   \item{\code{prestige_family}}{double. DESCRIPTION.}
-#'   \item{\code{prestige_f.exp.success}}{double. DESCRIPTION.}
-#'   \item{\code{prestige_likable}}{double. DESCRIPTION.}
-#'   \item{\code{prestige_respected}}{double. DESCRIPTION.}
+#'   \item{\code{cs_ID}}{integer. Code sheet ID.}
+#'   \item{\code{cs_textrec_ID}}{double. Text record ID. In some cases one text record produced multiple code sheets.}
+#'   \item{\code{text_type}}{integer. Classifying text type as: Cultural model, Case, or Both}
+#'   \item{\code{c_culture_code}}{integer. OWC Culture code from eHRAF.}
+#'   \item{\code{c_name}}{integer. HRAF culture name.}
+#'   \item{\code{c_region}}{integer. HRAF culture region.}
+#'   \item{\code{c_subregion}}{integer. HRAF sub-region.}
+#'   \item{\code{c_subsistence_type}}{integer. HRAF subsistence type classification.}
+#'   \item{\code{c_subsistence_code}}{integer. Numeric code assigned to HRAF subsistence classification.}
+#'   \item{\code{demo_sex}}{integer. Sex of the leader described coded as male, female, or both.}
+#'   \item{\code{dom_aggression}}{double. Does the leader use coercive control, aggression, or threats of violence? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
+#'   \item{\code{dom_assert.authority}}{double. Does the leader asserts authority over unwilling others, or have power over followers? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against.}
+#'   \item{\code{dom_avoid.dom}}{double. Does the leader avoid being controlled by others? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
+#'   \item{\code{dom_fear}}{double. Does the leader instill fear in followers? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
+#'   \item{\code{dom_fighting}}{double. Does the leader demonstrate, or is known for superior fighting ability? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
+#'   \item{\code{dom_personality}}{double. Does the leader have a forceful or dominant personality? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
+#'   \item{\code{dom_reputation}}{double. Does the leader's reputation lead followers to be submissive? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
+#'   \item{\code{dom_strong}}{double. Is the leader seen as physically stronger than most followers? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
+#'   \item{\code{neel_better.mates}}{double. Does the leader have higher quality mates relative to followers? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
+#'   \item{\code{neel_big.family}}{double. Does the leader have a larger (nuclear) family size relative to followers? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
+#'   \item{\code{neel_intelligence}}{double. Does the leader have high intelligence, above average knowledge, high cognitive abilities? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
+#'   \item{\code{neel_polygynous}}{double. Is the leader polygynous? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
+#'   \item{\code{prestige_counsel}}{double. Does the leader provide valued opinions, or is sought out for counsel? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
+#'   \item{\code{prestige_emulated}}{double. Do followers emulate the leader? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
+#'   \item{\code{prestige_expertise}}{double. Does the leader demonstrate expert knowledge, or have unique talents and abilities? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
+#'   \item{\code{prestige_family}}{double. Does the leader gain prestige or influence based on family level prestige? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
+#'   \item{\code{prestige_f.exp.success}}{double. Do followers have an expectation of success of the leader? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
+#'   \item{\code{prestige_likable}}{double. Is the leader likable? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
+#'   \item{\code{prestige_respected}}{double. Is the leader respected, admired, or held in high esteem? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
 #'   \item{\code{evidence_prestige_for}}{double. DESCRIPTION.}
 #'   \item{\code{evidence_prestige_against}}{double. DESCRIPTION.}
 #'   \item{\code{evidence_dom_for}}{double. DESCRIPTION.}
 #'   \item{\code{evidence_dom_against}}{double. DESCRIPTION.}
 #'   \item{\code{evidence_neel_for}}{double. DESCRIPTION.}
 #'   \item{\code{evidence_neel_against}}{double. DESCRIPTION.}
-#'   \item{\code{subsistence2}}{integer. DESCRIPTION.}
+#'   \item{\code{subsistence2}}{integer. Recoded HRAF subsistence classification with the value lables of: “hunter-gatherers”, “pastoralists”, “horticulturalists”, “agriculturalists”, and “other”}
 #'   \item{\code{region2}}{integer. DESCRIPTION.}
 #'   \item{\code{dom_for}}{double. DESCRIPTION.}
 #'   \item{\code{dom_against}}{double. DESCRIPTION.}
