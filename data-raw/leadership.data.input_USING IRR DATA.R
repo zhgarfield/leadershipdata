@@ -326,6 +326,38 @@ table(d.tmp$variable, d.tmp$value)
 t=table(d.tmp$variable, d.tmp$value)
 t
 
+# Create new variables for variables with many -1 values
+
+# Print tables of all variables
+for (i in 11:29){
+  print(names(leader_text)[i])
+  print(table(leader_text[i]))
+}
+
+# dom_aggression has 14 -1's
+leader_text$anti_dom_aggression <- 0
+leader_text$anti_dom_aggression[leader_text$dom_aggression == -1] <- 1
+
+# dom_assert.authority has 83 -1's
+leader_text$no_coercive_authority <- 0
+leader_text$no_coercive_authority[leader_text$dom_assert.authority == -1] <- 1
+
+# dom_personality has 23 -1's
+leader_text$non_dominant_personality <- 0
+leader_text$non_dominant_personality[leader_text$dom_personality == -1] <- 1
+
+# prestige_family has 12 -1's
+leader_text$no_family_prestige <- 0
+leader_text$no_family_prestige[leader_text$prestige_family == -1] <- 1
+
+# prestige_likable has 19 -1's
+leader_text$unlikeable <- 0
+leader_text$unlikeable[leader_text$prestige_likable == -1] <- 1
+
+# prestige_respected has 28 -1's
+leader_text$not_respected <- 0
+leader_text$not_respected[leader_text$prestige_respected == -1] <- 1
+
 
 # d.ctPKG<-d.ct[,c(1:53,132:167)]
 d.ctPKG <- dplyr::select(d.ct,
