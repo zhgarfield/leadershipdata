@@ -12,8 +12,8 @@ setwd("~/Documents/R/R projects/leadershipdata/data-raw")
 ##Importing the intial data set that includes leadership models beyond those analyzed in the MA.
 
 #d<-read.csv("zg_leadership3.csv")
-d<-read.csv("ehraf_leadership_FINAL_IRR.csv")
-
+d<-read.csv("ehraf_leadership_TOTAL_FINAL_IRR.csv")
+d<-d[c(1:1212),]
 
 ## Incorporating SCCS label, variables
 load('sccs.RData')
@@ -47,23 +47,23 @@ cultures$c_culture_code<-cultures$Culture.code
 ## Prestige/Dominance variables, VV variables, Neel variables (*d3 is main extract level data frame
 ##ORIGINAL CODE#d3 = d[,c(1:12, 27:35, 51:54, 61:67, 79:80)]
 
-d3<-d[,c(1:12,27:35,68,69,66,67,74:80,57,58)]
+#d3<-d[,c(1:12,27:35,68,69,66,67,74:80,57,58)]
 
 
 # Rows that are all zero on study variables == 1
-a=0
-for (i in 1:nrow(d3)){a[i] = 1*(sum(abs(d3[i,14:34]))==0)}
-d3$all.zero = a
-d4 = d3[d3$all.zero!=1,]
+# a=0
+# for (i in 1:nrow(d3)){a[i] = 1*(sum(abs(d3[i,14:34]))==0)}
+# d3$all.zero = a
+# d4 = d3[d3$all.zero!=1,]
 
-d3$c_cultural_complexity <-as.numeric(d3$c_cultural_complexity)
+d$c_cultural_complexity <-as.numeric(d$c_cultural_complexity)
 
 ## Recode 0 to -1, and -1 to 0
-tmp = as.matrix(d3[,14:34])
+tmp = as.matrix(d[,14:37])
 tmp[tmp==0] = -2
 tmp[tmp==-1] = 0
 tmp[tmp==-2] = -1
-d3[,14:34] = tmp
+d[,14:37] = tmp
 rm(tmp)
 
 ##Culture level data
@@ -73,7 +73,7 @@ rm(tmp)
 
 d.ct = read.csv('culture_fmpro2.csv', stringsAsFactors=F)
 d.ct = filter(d.ct, c_name != 'Bahia Brazilians ') # Not in d
-d.ct = left_join(d.ct, table(d3$c_name), by=c('c_name'='Var1'), copy=T)
+d.ct = left_join(d.ct, table(d$c_name), by=c('c_name'='Var1'), copy=T)
 #d.ct = rename(d.ct, extract_count=Freq)
 d.ct=dplyr::rename(d.ct, extract_count = Freq)
 
@@ -86,7 +86,7 @@ d.ct=dplyr::rename(d.ct, extract_count = Freq)
 # }
 
 model_total = function(vars, val, var_name){
-  x = by(d3[,vars], d3$c_name, FUN=function(x){sum(x==val, na.rm=T)})
+  x = by(d[,vars], d$c_name, FUN=function(x){sum(x==val, na.rm=T)})
   y = data.frame(c_name=names(x), var_name=as.numeric(x))
   names(y) = c('c_name', var_name)
   return(y)
@@ -111,26 +111,32 @@ d.ct = all_totals(prest_vars, 'prest')
 dom_vars = c('dom_aggression','dom_assert.authority', 'dom_avoid.dom', 'dom_fear', 'dom_fighting', 'dom_personality', 'dom_reputation', 'dom_strong')
 d.ct = all_totals(dom_vars, 'dom')
 
+#Hooper vars
+hooper_vars = c('hooper_performance','hooper_sanction.freeriders','hooper_payoff','hooper_group.size','hooper_coop.activities')
+d.ct = all_totals(hooper_vars, 'hooper')
 # # Van Vugt vars
 # vv_vars = c('vanvugt_coordinating', 'vanvugt_strategic')
 # d.ct = all_totals('vanvugt_coordinating', 'vvcoord')
 # d.ct = all_totals('vanvugt_strategic', 'vvstrat')
 
-all_vars= c(neel_vars, prest_vars, dom_vars)
+all_vars= c(neel_vars, prest_vars, dom_vars, hooper_vars)
 
 ## creating cumulative distriubtion table variables
-d3$evidence_prestige_for = (rowSums(d3[,prest_vars]==1))
-d3$evidence_prestige_against = (rowSums(d3[,prest_vars]==-1))
-d3$evidence_dom_for = (rowSums(d3[,dom_vars]==1))
-d3$evidence_dom_against = (rowSums(d3[,dom_vars]==-1))
-d3$evidence_neel_for = (rowSums(d3[,neel_vars]==1))
-d3$evidence_neel_against = (rowSums(d3[,neel_vars]==-1))
-# d3$evidence_vv_for = (rowSums(d3[,vv_vars]==1))
-# d3$evidence_vv_against = (rowSums(d3[,vv_vars]==-1))
+d$evidence_prestige_for = (rowSums(d[,prest_vars]==1))
+d$evidence_prestige_against = (rowSums(d[,prest_vars]==-1))
+d$evidence_dom_for = (rowSums(d[,dom_vars]==1))
+d$evidence_dom_against = (rowSums(d[,dom_vars]==-1))
+d$evidence_neel_for = (rowSums(d[,neel_vars]==1))
+d$evidence_neel_against = (rowSums(d[,neel_vars]==-1))
+d$evidence_hooper_for = (rowSums(d[,hooper_vars]==1))
+d$evidence_hooper_against = (rowSums(d[,hooper_vars]==-1))
+
+# d$evidence_vv_for = (rowSums(d[,vv_vars]==1))
+# d$evidence_vv_against = (rowSums(d[,vv_vars]==-1))
 
 # # dplyr version (incomplete)
 #
-# d.ct.new2 = d3 %>%
+# d.ct.new2 = d %>%
 #   group_by(c_name) %>%
 #   summarise(
 #     extract_count = n(),
@@ -170,12 +176,12 @@ d.ct=merge(cultures, d.ct, by='c_culture_code', all=T)
 ####RECODING / MANAGING VARIABLES
 
 ## Doing some recoding of subsistence level
-d3$subsistence2<-recode(d3$c_subsistence_type, "'forager/food producers'= 'hunter gatherers'; 'foragers'='hunter gatherers';'horticulturalists'='horticulturalists'; 'intensive agriculturalists'='agriculturalists';'other'='other';'pastoral/agriculturalists'='pastoralists';'pastoralists'='pastoralists'")
+d$subsistence2<-recode(d$c_subsistence_type, "'forager/food producers'= 'hunter gatherers'; 'foragers'='hunter gatherers';'horticulturalists'='horticulturalists'; 'intensive agriculturalists'='agriculturalists';'other'='other';'pastoral/agriculturalists'='pastoralists';'pastoralists'='pastoralists'")
 d.ct$subsistence2<-recode(d.ct$c_subsistence_type, "'forager/food producers'= 'hunter gatherers'; 'foragers'='hunter gatherers';'horticulturalists'='horticulturalists'; 'intensive agriculturalists'='agriculturalists';'other'='other';'pastoral/agriculturalists'='pastoralists';'pastoralists'='pastoralists'")
 #d.ct.old$subsistence2<-recode(d.ct.old$c_subsistence_type, "'forager/food producers'= 'hunter gatherers'; 'foragers'='hunter gatherers';'horticulturalists'='horticulturalists'; 'intensive agriculturalists'='agriculturalists';'other'='other';'pastoral/agriculturalists'='pastoralists';'pastoralists'='pastoralists'")
 
 
-d3$region2<-recode(d3$c_subregion, "'Amazon and Orinoco'='South America'; 'Arctic and Subarctic'='North America'; 'Australia'='Insular Pacific'; 'British Isles'='Circum-Mediterranean';
+d$region2<-recode(d$c_subregion, "'Amazon and Orinoco'='South America'; 'Arctic and Subarctic'='North America'; 'Australia'='Insular Pacific'; 'British Isles'='Circum-Mediterranean';
                    'Central Africa'= 'Africa'; 'Central America'='South America'; 'Central Andes'='South America'; 'East Asia'='East Eurasia'; 'Eastern Africa'='Circum-Mediterranean';
                    'Eastern South America'='South America'; 'Eastern Woodlands'='North America'; 'Maya Area'='North America'; 'Melanesia'='Insular Pacific'; 'Micronesia'='Insular Pacific';
                    'Middle East'='Circum-Mediterranean'; 'North Asia'='East Eurasia'; 'Northern Africa'='Africa'; 'Northern Mexico'='North America';
@@ -193,7 +199,7 @@ d.ct$region2<-recode(d.ct$c_subregion, "'Amazon and Orinoco'='South America'; 'A
 
 d.ct$subsistence2<-as.factor(d.ct$subsistence2)
 
-##above, recoded d3$region, according to SCCS region, using eHRAF subregion. BUT, one Southeast Asia (Central Thai) that should be East Eurasia coded as Insular Pacific
+##above, recoded d$region, according to SCCS region, using eHRAF subregion. BUT, one Southeast Asia (Central Thai) that should be East Eurasia coded as Insular Pacific
 #### and 3 Western Africa coded as Africa that should be Circum Medeterainian (Dogon, Hause, Wolof)
 
 ###Recoding SCCS variables
@@ -213,15 +219,17 @@ d.ct$V69=factor(d.ct$V69)
 # Score 1 if *any* extract within a culture has a 1 for that variable (*d.ct2 is culture level data [single count evidence for] for variable analyses)
 # More accurately: balance of +1 against -1
 
-d.ct2 = aggregate(d3[,14:32], by=list(d3$c_name), FUN = function(x) {(sum(x) > 0)*1})
+d.ct2 = aggregate(d[,14:37], by=list(d$c_name), FUN = function(x) {(sum(x) > 0)*1})
 d.ct2$c_name=d.ct2$Group.1
 #creating a dataframe of means values of variables at culture level (*d.ct3 is culture level data [means of variables] for variables )
-d.ct3 = aggregate(d3[,14:32], by=list(d3$c_name), FUN = mean)
+d.ct3 = aggregate(d[,14:37], by=list(d$c_name), FUN = mean)
 
 # Compute models scores by culture
-d.ct$neel_cult_score = as.numeric(by(d3[,c('c_name', neel_vars)], d3$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
-d.ct$prest_cult_score = as.numeric(by(d3[,c('c_name', prest_vars)], d3$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
-d.ct$dom_cult_score = as.numeric(by(d3[,c('c_name', dom_vars)], d3$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
+d$c_name<-factor(d$c_name)
+d.ct$neel_cult_score = as.numeric(by(d[,c('c_name', neel_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
+d.ct$prest_cult_score = as.numeric(by(d[,c('c_name', prest_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
+d.ct$dom_cult_score = as.numeric(by(d[,c('c_name', dom_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
+d.ct$hooper_cult_score = as.numeric(by(d[,c('c_name', hooper_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
 
 ##adding in some other culture level variables
 #d.ct2 <-merge(d.ct, d.ct2, by="c_name")
@@ -230,7 +238,7 @@ d.ct$dom_cult_score = as.numeric(by(d3[,c('c_name', dom_vars)], d3$c_name, FUN=f
 ## PROBLEM HERE*****************************************
 present = function(x) {(sum(x) > 0)*1}
 
-d.ct = d3 %>%
+d.ct = d %>%
   group_by(c_name) %>%
   dplyr::select(c_name, one_of(all_vars)) %>%
   summarise_each(funs(present, mean)) %>%
@@ -242,60 +250,69 @@ d.ct = d3 %>%
 #### CREATING DATA FRAMES FOR MODELS ETC. (all extract level data frames for model totals)
 
 ## Creating variables based on models totaling for, none, and against
-d3$dom_for = rowSums(d3[,c('dom_aggression', 'dom_fear', 'dom_assert.authority',
+d$dom_for = rowSums(d[,c('dom_aggression', 'dom_fear', 'dom_assert.authority',
                            'dom_avoid.dom', 'dom_fighting', 'dom_personality',
                            'dom_reputation', 'dom_strong')]==1)
 
-d3$dom_against = rowSums(d3[,c('dom_aggression', 'dom_fear', 'dom_assert.authority',
+d$dom_against = rowSums(d[,c('dom_aggression', 'dom_fear', 'dom_assert.authority',
                                'dom_avoid.dom', 'dom_fighting', 'dom_personality',
                                'dom_reputation', 'dom_strong')]==-1)
 
-d3$dom_none = rowSums(d3[,c('dom_aggression', 'dom_fear', 'dom_assert.authority',
+d$dom_none = rowSums(d[,c('dom_aggression', 'dom_fear', 'dom_assert.authority',
                             'dom_avoid.dom', 'dom_fighting', 'dom_personality',
                             'dom_reputation', 'dom_strong')]==0)
-d3$dom_sum = d3$dom_for + d3$dom_against
+d$dom_sum = d$dom_for + d$dom_against
 
-d3$prestige_for = rowSums(d3[,c('prestige_counsel', 'prestige_emulated', 'prestige_expertise',
+d$prestige_for = rowSums(d[,c('prestige_counsel', 'prestige_emulated', 'prestige_expertise',
                                 'prestige_family', 'prestige_f.exp.success', 'prestige_likable',
                                 'prestige_respected')]==1)
 
-d3$prestige_against = rowSums(d3[,c('prestige_counsel', 'prestige_emulated', 'prestige_expertise',
+d$prestige_against = rowSums(d[,c('prestige_counsel', 'prestige_emulated', 'prestige_expertise',
                                     'prestige_family', 'prestige_f.exp.success', 'prestige_likable',
                                     'prestige_respected')]==-1)
 
-d3$prestige_none = rowSums(d3[,c('prestige_counsel', 'prestige_emulated', 'prestige_expertise',
+d$prestige_none = rowSums(d[,c('prestige_counsel', 'prestige_emulated', 'prestige_expertise',
                                  'prestige_family', 'prestige_f.exp.success', 'prestige_likable',
                                  'prestige_respected')]==0)
-d3$prestige_sum= d3$prestige_for + d3$prestige_against
+d$prestige_sum= d$prestige_for + d$prestige_against
 
-d3$neel_for = rowSums(d3[,c('neel_better.mates', 'neel_big.family', 'neel_intelligence',
+d$neel_for = rowSums(d[,c('neel_better.mates', 'neel_big.family', 'neel_intelligence',
                             'neel_polygynous')]==1)
 
-d3$neel_against = rowSums(d3[,c('neel_better.mates', 'neel_big.family', 'neel_intelligence',
+d$neel_against = rowSums(d[,c('neel_better.mates', 'neel_big.family', 'neel_intelligence',
                                 'neel_polygynous')]==-1)
 
-d3$neel_none = rowSums(d3[,c('neel_better.mates', 'neel_big.family', 'neel_intelligence',
+d$neel_none = rowSums(d[,c('neel_better.mates', 'neel_big.family', 'neel_intelligence',
                              'neel_polygynous')]==0)
-d3$neel_sum = d3$neel_for + d3$neel_against
+d$neel_sum = d$neel_for + d$neel_against
+
+d$hooper_for = rowSums(d[,c('hooper_performance','hooper_sanction.freeriders','hooper_payoff','hooper_group.size','hooper_coop.activities')]==1)
+
+d$hooper_against = rowSums(d[,c('hooper_performance','hooper_sanction.freeriders','hooper_payoff','hooper_group.size','hooper_coop.activities')]==-1)
+
+d$hooper_none = rowSums(d[,c('hooper_performance','hooper_sanction.freeriders','hooper_payoff','hooper_group.size','hooper_coop.activities')]==0)
+
+d$hooper_sum = d$hooper_for + d$hooper_against
 
 #### MERGING Culture level variables with extract level variables (*dm is extract level data, but with culture level variables attached to each extract)
-dm <-merge(d3, d.ct, by="c_name")
+dm <-merge(d, d.ct, by="c_name")
 
 
 ##new data frames by model (no culture name)
-d.dom = d3[,c(14:21)]
-d.prest = d3[,c(26:32)]
-d.neel = d3[,c(22:25)]
-d.vv=d3[,c(33:34)]
-#d.vvstrat = d3[,c(34)]
-#d.vvcoord = d3[,c(33)]
+d.dom = d[,c(14:21)]
+d.prest = d[,c(31:37)]
+d.neel = d[,c(27:30)]
+d.hooper = d[,c(22:26)]
+#d.vv=d[,c(33:34)]
+#d.vvstrat = d[,c(34)]
+#d.vvcoord = d[,c(33)]
 ## these codes include culture names, removed from script
-#d.dom = d3[,c(5, 14:21)]
-#d.prest = d3[,c(5, 26:32)]
-#d.neel = d3[,c(5, 22:25)]
-#d.vv=d3[,c(5, 33:34)]
-#d.vvstrat = d3[,c(5, 34)]
-#d.vvcoord = d3[,c(5, 33)]
+#d.dom = d[,c(5, 14:21)]
+#d.prest = d[,c(5, 26:32)]
+#d.neel = d[,c(5, 22:25)]
+#d.vv=d[,c(5, 33:34)]
+#d.vvstrat = d[,c(5, 34)]
+#d.vvcoord = d[,c(5, 33)]
 
 ## making d.dom data set with only extracts that have data, e.g. removes all extracts with all noevidence
 d.dom2 = d.dom[rowSums(d.dom!=0)!=0,]
@@ -310,40 +327,47 @@ d.neel2 = d.neel[rowSums(d.neel!=0)!=0,]
 #does not lose any cultures
 
 ## for VV variables (both strat and coord in frame)
-d.vv2 = d.vv[rowSums(d.vv!=0)!=0,]
+#d.vv2 = d.vv[rowSums(d.vv!=0)!=0,]
 #does not lose any cultures
 
 ##making variables of totals for each model (these omit cases where there is a 1 and -1)
-d3$dom_totals = d3$dom_aggression + d3$dom_assert.authority + d3$dom_avoid.dom + d3$dom_fear + d3$dom_fighting + d3$dom_personality + d3$dom_reputation + d3$dom_strong
-d3$prest_totals = d3$prestige_emulated + d3$prestige_likable + d3$prestige_counsel + d3$prestige_expertise + d3$prestige_f.exp.success + d3$prestige_respected + d3$prestige_family
+d$dom_totals = d$dom_aggression + d$dom_assert.authority + d$dom_avoid.dom + d$dom_fear + d$dom_fighting + d$dom_personality + d$dom_reputation + d$dom_strong
+d$prest_totals = d$prestige_emulated + d$prestige_likable + d$prestige_counsel + d$prestige_expertise + d$prestige_f.exp.success + d$prestige_respected + d$prestige_family
+d$neel_totals = d$neel_intelligence + d$neel_polygynous + d$neel_better.mates + d$neel_big.family
+d$hooper_totals = d$hooper_performance + d$hooper_group.size + d$hooper_coop.activities + d$hooper_sanction.freeriders + d$hooper_payoff
 
 ## putting data in long form
-d.tmp=melt(d3[,c(1, 14:34)], id.vars='cs_ID')
+d.tmp=melt(d[,c(1, 14:37)], id.vars='cs_ID')
 head(d.tmp)
 # table(d.tmp)
-# table(d3)
+# table(d)
 table(d.tmp$variable, d.tmp$value)
 t=table(d.tmp$variable, d.tmp$value)
 t
 
 
+#Final renaming
+d.ct$subsistence<-d.ct$subsistence2
+d.ct$region<-d.ct$region2
+d.ct$settlement_fixity<-d.ct$settlement_fixity2
+d.ct$com_size<-d.ct$com_size2
+d.ct$pop_density<-d.ct$pop_density2
+
 # d.ctPKG<-d.ct[,c(1:53,132:167)]
 d.ctPKG <- dplyr::select(d.ct,
                          c_name:c_culture_code,
                          Location,
-                         Position,
-                         c_cultural_complexity,
-                         c_region:dom_cult_score )
+                         Documents,
+                         V158.1,
+                         c_cultural_complexity:hooper_total_against,
+                         neel_cult_score:pop_density
+                         )
 
 
-leader_text<-dplyr::select(d3,
+leader_text<-dplyr::select(d,
                            cs_ID:c_subsistence_code,
-                           demo_sex:prestige_respected,
-                           evidence_prestige_for:region2,
-                           dom_none,dom_sum,
-                           prestige_none,prestige_sum,
-                           neel_none,neel_sum,
-                           dom_totals,prest_totals)
+                           demo_sex:evidence_hooper_against,
+                           dom_for:hooper_totals)
 leader_cult<-d.ctPKG
 use_data(leader_text,leader_cult,overwrite=TRUE)
 
