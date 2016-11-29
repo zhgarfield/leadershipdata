@@ -26,6 +26,11 @@
   \item{\code{dom_personality_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
   \item{\code{dom_reputation_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
   \item{\code{dom_strong_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+  \item{\code{hooper_performance_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+  \item{\code{hooper_sanction.freeriders_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+  \item{\code{hooper_payoff_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+  \item{\code{hooper_group.size_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+  \item{\code{hooper_coop.activities_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
   \item{\code{neel_better.mates_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
   \item{\code{neel_big.family_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
   \item{\code{neel_intelligence_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
@@ -45,10 +50,18 @@
   \item{\code{dom_personality_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
   \item{\code{dom_reputation_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
   \item{\code{dom_strong_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+  \item{\code{hooper_performance_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+  \item{\code{hooper_sanction.freeriders_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+  \item{\code{hooper_coop.activities_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+  \item{\code{hooper_payoff_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+  \item{\code{hooper_group.size_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
   \item{\code{c_culture_code}}{integer. HRAF OWC culture code.}
-  \item{\code{Location}}{integer. Nation state which culture is located within}
-  \item{\code{Position}}{integer. Latitude longitude coordinates.}
-  \item{\code{c_cultural_complexity}}{integer. SCCS cultural complexity value (SCCS V158.1)}
+  \item{\code{Location}}{integer. Nation state which culture is located within, from the SCCS}
+  \item{\code{Documents}}{integer. Number of eHRAF documents providing data for that culture.}
+  \item{\code{V158.1}}{integer. SCCS cultural complexity variable}
+  \item{\code{c_cultural_complexity}}{integer. SCCS cultural complexity value (SCCS V158.1), with modifications *check discrepancies}
+  \item{\code{c_latitude}}{integer. Location latitude.}
+  \item{\code{c_longitude}}{integer. Location longitude.}
   \item{\code{c_region}}{character. HRAF region}
   \item{\code{c_subregion}}{character. HRAF subregion}
   \item{\code{c_subsistence_code}}{integer. Numeric code assigned to HRAF subsistence classification.}
@@ -66,11 +79,14 @@
   \item{\code{dom_total_for}}{double. DESCRIPTION.}
   \item{\code{dom_total_none}}{double. DESCRIPTION.}
   \item{\code{dom_total_against}}{double. DESCRIPTION.}
-  \item{\code{subsistence2}}{integer. DESCRIPTION.}
-  \item{\code{region2}}{character. DESCRIPTION.}
-  \item{\code{settlement_fixity2}}{integer. DESCRIPTION.}
-  \item{\code{com_size2}}{integer. DESCRIPTION.}
-  \item{\code{pop_density2}}{integer. DESCRIPTION.}
+  \item{\code{hooper_total_for}}{double. DESCRIPTION.}
+  \item{\code{hooper_total_none}}{double. DESCRIPTION.}
+  \item{\code{hooper_total_against}}{double. DESCRIPTION.}
+  \item{\code{subsistence}}{integer. DESCRIPTION.}
+  \item{\code{region}}{character. DESCRIPTION.}
+  \item{\code{settlement_fixity}}{integer. DESCRIPTION.}
+  \item{\code{com_size}}{integer. DESCRIPTION.}
+  \item{\code{pop_density}}{integer. DESCRIPTION.}
   \item{\code{neel_cult_score}}{double. DESCRIPTION.}
   \item{\code{prest_cult_score}}{double. DESCRIPTION.}
   \item{\code{dom_cult_score}}{double. DESCRIPTION.}

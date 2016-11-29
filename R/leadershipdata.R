@@ -22,6 +22,12 @@
 #'   \item{\code{dom_personality}}{double. Does the leader have a forceful or dominant personality? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
 #'   \item{\code{dom_reputation}}{double. Does the leader's reputation lead followers to be submissive? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
 #'   \item{\code{dom_strong}}{double. Is the leader seen as physically stronger than most followers? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
+#'   \item{\code{hooper_performance}}{double. asf? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
+#'   \item{\code{hooper_sanction.freeriders}}{double. asf? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
+#'   \item{\code{hooper_payoff}}{double. asf? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
+#'   \item{\code{hooper_group.size}}{double. asf? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
+#'   \item{\code{hooper_coop.activities}}{double. asf? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
+#'   \item{\code{hooper_coop.activities}}{double. asf? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
 #'   \item{\code{neel_better.mates}}{double. Does the leader have higher quality mates relative to followers? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
 #'   \item{\code{neel_big.family}}{double. Does the leader have a larger (nuclear) family size relative to followers? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
 #'   \item{\code{neel_intelligence}}{double. Does the leader have high intelligence, above average knowledge, high cognitive abilities? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
@@ -33,20 +39,36 @@
 #'   \item{\code{prestige_f.exp.success}}{double. Do followers have an expectation of success of the leader? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
 #'   \item{\code{prestige_likable}}{double. Is the leader likable? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
 #'   \item{\code{prestige_respected}}{double. Is the leader respected, admired, or held in high esteem? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
+#'   \item{\code{doc_ID}}{double. asf.}
+#'   \item{\code{doc_field_date}}{double. asf.}
+#'   \item{\code{doc_coverage_date}}{double. asf.}
+#'   \item{\code{doc_evaluation}}{double. asf.}
+#'   \item{\code{doc_field_date}}{double. asf.}
+#'   \item{\code{author_ID}}{double. asf.}
 #'   \item{\code{evidence_prestige_for}}{double. The sum of evidence for the prestige model, e.g., the number of prestige-model variables coded '1' for the codesheet.}
 #'   \item{\code{evidence_prestige_against}}{double. The sum of evidence against the prestige model, e.g., the number of prestige-model variables coded '-1' for the codesheet.}
 #'   \item{\code{evidence_dom_for}}{double. The sum of evidence for the dominance model, e.g., the number of dominance-model variables coded '1' for the codesheet.}
 #'   \item{\code{evidence_dom_against}}{double. The sum of evidence against the dominance model, e.g., the number of dominance-model variables coded '-1' for the codesheet.}
 #'   \item{\code{evidence_neel_for}}{double. The sum of evidence for the neel model, e.g., the number of neel-model variables coded '1' for the codesheet.}
 #'   \item{\code{evidence_neel_against}}{double. The sum of evidence against the neel model, e.g., the number of neel-model variables coded '-1' for the codesheet.}
-#'   \item{\code{subsistence2}}{integer. Recoded HRAF subsistence classification with the value lables of: “hunter-gatherers”, “pastoralists”, “horticulturalists”, “agriculturalists”, and “other”}
-#'   \item{\code{region2}}{integer. SCCS region classification using the following value lables: "Africa", "Circum-Mediterranean", "East Eurasia", "Insular Pacific", "North America", "South America"}
+#'   \item{\code{evidence_hooper_for}}{double. The sum of evidence for the Hooper model, e.g., the number of hooper-model variables coded '1' for the codesheet.}
+#'   \item{\code{evidence_hooper_against}}{double. The sum of evidence against the Hooper model, e.g., the number of hooper-model variables coded '-1' for the codesheet.}
+#'   \item{\code{subsistence}}{integer. Recoded HRAF subsistence classification with the value lables of: “hunter-gatherers”, “pastoralists”, “horticulturalists”, “agriculturalists”, and “other”}
+#'   \item{\code{region}}{integer. SCCS region classification using the following value lables: "Africa", "Circum-Mediterranean", "East Eurasia", "Insular Pacific", "North America", "South America"}
+#'   \item{\code{dom_against}}{double. The number of dominance model variables evidence against from the codesheet.}
 #'   \item{\code{dom_none}}{double. The number of dominance model variables providing no evidence from the codesheet.}
 #'   \item{\code{dom_sum}}{double. The number of dominance model variables that provide any evidence from that codesheet.}
 #'   \item{\code{prestige_none}}{double. The number of prestige model variables providing no evidence from the codesheet.}
 #'   \item{\code{prestige_sum}}{double. The number of prestige model variables that provide any evidence from that codesheet.}
+#'   \item{\code{prestige_against}}{double. The number of prestige model variables evidence against from the codesheet.}
 #'   \item{\code{neel_none}}{double. The number of neel model variables providing no evidence from the codesheet.}
 #'   \item{\code{neel_sum}}{double. The number of neel model variables that provide any evidence from that codesheet.}
+#'   \item{\code{neel_against}}{double. The number of Neel model variables evidence against from the codesheet.}
+#'   \item{\code{hooper_none}}{double. The number of Hooper model variables providing no evidence from the codesheet.}
+#'   \item{\code{hooper_sum}}{double. The number of Hooper model variables that provide any evidence from that codesheet.}
+#'   \item{\code{hooper_against}}{double. The number of Hooper model variables evidence against from the codesheet.}
+#'   \item{\code{neel_totals}}{double. The sum of all Neel model variables from that codesheet, e.g., '1's + '-1's.}
+#'   \item{\code{hooper_totals}}{double. The sum of all Hooper model variables from that codesheet, e.g., '1's + '-1's.}
 #'   \item{\code{dom_totals}}{double. The sum of all dominance model variables from that codesheet, e.g., '1's + '-1's.}
 #'   \item{\code{prest_totals}}{double. The sum of all prestige model variables from that codesheet, e.g., '1's + '-1's.}
 #' }
@@ -80,6 +102,11 @@
 #'   \item{\code{dom_personality_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
 #'   \item{\code{dom_reputation_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
 #'   \item{\code{dom_strong_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+#'   \item{\code{hooper_performance_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+#'   \item{\code{hooper_sanction.freeriders_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+#'   \item{\code{hooper_payoff_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+#'   \item{\code{hooper_group.size_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
+#'   \item{\code{hooper_coop.activities_present}}{double. Value of 1 indicates as least one codesheeet/text provides evidence for this variable, for this culture.}
 #'   \item{\code{neel_better.mates_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
 #'   \item{\code{neel_big.family_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
 #'   \item{\code{neel_intelligence_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
@@ -99,10 +126,18 @@
 #'   \item{\code{dom_personality_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
 #'   \item{\code{dom_reputation_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
 #'   \item{\code{dom_strong_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+#'   \item{\code{hooper_performance_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+#'   \item{\code{hooper_sanction.freeriders_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+#'   \item{\code{hooper_coop.activities_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+#'   \item{\code{hooper_payoff_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
+#'   \item{\code{hooper_group.size_mean}}{double. Mean value of variable across all codesheets for each culture. Values greater than 0 indicate greater evidence for than evidence against.}
 #'   \item{\code{c_culture_code}}{integer. HRAF OWC culture code.}
-#'   \item{\code{Location}}{integer. Nation state which culture is located within}
-#'   \item{\code{Position}}{integer. Latitude longitude coordinates.}
-#'   \item{\code{c_cultural_complexity}}{integer. SCCS cultural complexity value (SCCS V158.1)}
+#'   \item{\code{Location}}{integer. Nation state which culture is located within, from the SCCS}
+#'   \item{\code{Documents}}{integer. Number of eHRAF documents providing data for that culture.}
+#'   \item{\code{V158.1}}{integer. SCCS cultural complexity variable}
+#'   \item{\code{c_cultural_complexity}}{integer. SCCS cultural complexity value (SCCS V158.1), with modifications *check discrepancies}
+#'   \item{\code{c_latitude}}{integer. Location latitude.}
+#'   \item{\code{c_longitude}}{integer. Location longitude.}
 #'   \item{\code{c_region}}{character. HRAF region}
 #'   \item{\code{c_subregion}}{character. HRAF subregion}
 #'   \item{\code{c_subsistence_code}}{integer. Numeric code assigned to HRAF subsistence classification.}
@@ -120,11 +155,14 @@
 #'   \item{\code{dom_total_for}}{double. DESCRIPTION.}
 #'   \item{\code{dom_total_none}}{double. DESCRIPTION.}
 #'   \item{\code{dom_total_against}}{double. DESCRIPTION.}
-#'   \item{\code{subsistence2}}{integer. DESCRIPTION.}
-#'   \item{\code{region2}}{character. DESCRIPTION.}
-#'   \item{\code{settlement_fixity2}}{integer. DESCRIPTION.}
-#'   \item{\code{com_size2}}{integer. DESCRIPTION.}
-#'   \item{\code{pop_density2}}{integer. DESCRIPTION.}
+#'   \item{\code{hooper_total_for}}{double. DESCRIPTION.}
+#'   \item{\code{hooper_total_none}}{double. DESCRIPTION.}
+#'   \item{\code{hooper_total_against}}{double. DESCRIPTION.}
+#'   \item{\code{subsistence}}{integer. DESCRIPTION.}
+#'   \item{\code{region}}{character. DESCRIPTION.}
+#'   \item{\code{settlement_fixity}}{integer. DESCRIPTION.}
+#'   \item{\code{com_size}}{integer. DESCRIPTION.}
+#'   \item{\code{pop_density}}{integer. DESCRIPTION.}
 #'   \item{\code{neel_cult_score}}{double. DESCRIPTION.}
 #'   \item{\code{prest_cult_score}}{double. DESCRIPTION.}
 #'   \item{\code{dom_cult_score}}{double. DESCRIPTION.}
