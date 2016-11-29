@@ -354,33 +354,33 @@ for (i in 11:29){
 }
 
 # dom_aggression has 14 -1's
-d$anti_dom_aggression <- 0
-d$anti_dom_aggression[d$dom_aggression == -1] <- 1
+d$dom_anti_aggression <- 0
+d$dom_anti_aggression[d$dom_aggression == -1] <- 1
 d$dom_aggression[d$dom_aggression == -1] <- 0
 
 # dom_assert.authority has 83 -1's
-d$no_coercive_authority <- 0
-d$no_coercive_authority[d$dom_assert.authority == -1] <- 1
+d$dom_no_coercive_authority <- 0
+d$dom_no_coercive_authority[d$dom_assert.authority == -1] <- 1
 d$dom_assert.authority[d$dom_assert.authority == -1] <- 0
 
 # dom_personality has 23 -1's
-d$non_dominant_personality <- 0
-d$non_dominant_personality[d$dom_personality == -1] <- 1
+d$dom_non_dominant_personality <- 0
+d$dom_non_dominant_personality[d$dom_personality == -1] <- 1
 d$dom_personality[d$dom_personality == -1] <- 0
 
 # prestige_family has 12 -1's
-d$no_family_prestige <- 0
-d$no_family_prestige[d$prestige_family == -1] <- 1
+d$prestige_no_family_prestige <- 0
+d$prestige_no_family_prestige[d$prestige_family == -1] <- 1
 d$prestige_family[d$prestige_family == -1] <- 0
 
 # prestige_likable has 19 -1's
-d$unlikeable <- 0
-d$unlikeable[d$prestige_likable == -1] <- 1
+d$prestige_unlikeable <- 0
+d$prestige_unlikeable[d$prestige_likable == -1] <- 1
 d$prestige_likable[d$pretige_likable == -1] <- 0
 
 # prestige_respected has 28 -1's
-d$not_respected <- 0
-d$not_respected[d$prestige_respected == -1] <- 1
+d$prestige_not_respected <- 0
+d$prestige_not_respected[d$prestige_respected == -1] <- 1
 d$prestige_respected[d$prestige_respected == -1] <- 0
 
 #Final renaming
