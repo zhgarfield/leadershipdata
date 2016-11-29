@@ -354,34 +354,34 @@ for (i in 11:29){
 }
 
 # dom_aggression has 14 -1's
-leader_text$anti_dom_aggression <- 0
-leader_text$anti_dom_aggression[leader_text$dom_aggression == -1] <- 1
-leader_text$dom_aggression[leader_text$dom_aggression == -1] <- 0
+d$anti_dom_aggression <- 0
+d$anti_dom_aggression[d$dom_aggression == -1] <- 1
+d$dom_aggression[d$dom_aggression == -1] <- 0
 
 # dom_assert.authority has 83 -1's
-leader_text$no_coercive_authority <- 0
-leader_text$no_coercive_authority[leader_text$dom_assert.authority == -1] <- 1
-leader_text$dom_assert.authority[leader_text$dom_assert.authority == -1] <- 0
+d$no_coercive_authority <- 0
+d$no_coercive_authority[d$dom_assert.authority == -1] <- 1
+d$dom_assert.authority[d$dom_assert.authority == -1] <- 0
 
 # dom_personality has 23 -1's
-leader_text$non_dominant_personality <- 0
-leader_text$non_dominant_personality[leader_text$dom_personality == -1] <- 1
-leader_text$dom_personality[leader_text$dom_personality == -1] <- 0
+d$non_dominant_personality <- 0
+d$non_dominant_personality[d$dom_personality == -1] <- 1
+d$dom_personality[d$dom_personality == -1] <- 0
 
 # prestige_family has 12 -1's
-leader_text$no_family_prestige <- 0
-leader_text$no_family_prestige[leader_text$prestige_family == -1] <- 1
-leader_text$prestige_family[leader_text$prestige_family == -1] <- 0
+d$no_family_prestige <- 0
+d$no_family_prestige[d$prestige_family == -1] <- 1
+d$prestige_family[d$prestige_family == -1] <- 0
 
 # prestige_likable has 19 -1's
-leader_text$unlikeable <- 0
-leader_text$unlikeable[leader_text$prestige_likable == -1] <- 1
-leader_text$prestige_likable[leader_text$pretige_likable == -1] <- 0
+d$unlikeable <- 0
+d$unlikeable[d$prestige_likable == -1] <- 1
+d$prestige_likable[d$pretige_likable == -1] <- 0
 
 # prestige_respected has 28 -1's
-leader_text$not_respected <- 0
-leader_text$not_respected[leader_text$prestige_respected == -1] <- 1
-leader_text$prestige_respected[leader_text$prestige_respected == -1] <- 0
+d$not_respected <- 0
+d$not_respected[d$prestige_respected == -1] <- 1
+d$prestige_respected[d$prestige_respected == -1] <- 0
 
 #Final renaming
 d.ct$subsistence<-d.ct$subsistence2
@@ -403,8 +403,7 @@ d.ctPKG <- dplyr::select(d.ct,
 
 leader_text<-dplyr::select(d,
                            cs_ID:c_subsistence_code,
-                           demo_sex:evidence_hooper_against,
-                           dom_for:hooper_totals)
+                           demo_sex:not_respected)
 leader_cult<-d.ctPKG
 use_data(leader_text,leader_cult,overwrite=TRUE)
 

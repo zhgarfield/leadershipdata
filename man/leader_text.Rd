@@ -72,7 +72,12 @@
   \item{\code{neel_totals}}{double. The sum of all Neel model variables from that codesheet, e.g., '1's + '-1's.}
   \item{\code{hooper_totals}}{double. The sum of all Hooper model variables from that codesheet, e.g., '1's + '-1's.}
   \item{\code{dom_totals}}{double. The sum of all dominance model variables from that codesheet, e.g., '1's + '-1's.}
-  \item{\code{prest_totals}}{double. The sum of all prestige model variables from that codesheet, e.g., '1's + '-1's.}
+  \item{\code{anti_dom_aggression}}{double. DESCR.}
+  \item{\code{no_coercive_authority}}{double. DESCR.}
+  \item{\code{non_dominant_personality}}{double. DESCR.}
+  \item{\code{no_family_prestige}}{double. DESCR.}
+  \item{\code{unlikeable}}{double. DESCR.}
+  \item{\code{not_respected}}{double. DESCR.}
 }}
 \source{
 \url{http://www.ehrafsite.info/}
