@@ -383,6 +383,21 @@ d$prestige_not_respected <- 0
 d$prestige_not_respected[d$prestige_respected == -1] <- 1
 d$prestige_respected[d$prestige_respected == -1] <- 0
 
+#Removing codes of no evidence when cases of no evidence is less than 10%
+d$dom_avoid.dom[d$dom_avoid.dom == -1] <- 0
+d$dom_fear[d$dom_fear == -1] <- 0
+d$dom_fighting[d$dom_fighting == -1] <- 0
+d$dom_reputation[d$dom_reputation == -1] <- 0
+d$hooper_performanced[d$hooper_performance == -1] <- 0
+d$hooper_sanction.freeriders[d$hooper_sanction.freeriders == -1] <- 0
+d$hooper_payoff[d$hooper_payoff == -1] <- 0
+d$hooper_group.size[d$hooper_group.size == -1] <- 0
+d$hooper_coop.activities[d$hooper_coop.activities == -1] <- 0
+d$neel_intelligence[d$neel_intelligence == -1] <- 0
+d$prestige_counsel[d$prestige_counsel == -1] <- 0
+d$prestige_emulated[d$prestige_emulated == -1] <- 0
+d$prestige_expertise[d$prestige_expertise == -1] <- 0
+
 #Final renaming
 d.ct$subsistence<-d.ct$subsistence2
 d.ct$region<-d.ct$region2
