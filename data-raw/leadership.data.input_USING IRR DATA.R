@@ -349,8 +349,8 @@ t
 
 # Print tables of all variables to see which have many -1's
 for (i in 11:29){
-  print(names(leader_text)[i])
-  print(table(leader_text[i]))
+  print(names(d)[i])
+  print(table(d[i]))
 }
 
 #Which bits of evidence against to keep?
@@ -425,6 +425,8 @@ d$prestige_emulated[d$prestige_emulated == -1] <- 0
 d$prestige_expertise[d$prestige_expertise == -1] <- 0
 
 #Final renaming
+d$subsistence<-d$subsistence2
+d$region<-d$region2
 d.ct$subsistence<-d.ct$subsistence2
 d.ct$region<-d.ct$region2
 d.ct$settlement_fixity<-d.ct$settlement_fixity2
@@ -443,8 +445,8 @@ d.ctPKG <- dplyr::select(d.ct,
 
 
 leader_text<-dplyr::select(d,
-                           cs_ID:c_subsistence_code,
-                           demo_sex:prestige_not_respected)
+                           cs_ID:evidence_hooper_against,
+                           dom_for:region)
 leader_cult<-d.ctPKG
 use_data(leader_text,leader_cult,overwrite=TRUE)
 
