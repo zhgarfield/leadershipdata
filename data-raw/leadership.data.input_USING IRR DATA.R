@@ -402,7 +402,7 @@ d$prestige_emulated[d$pretige_emulated == -1] <- 0
 # prestige_likable has 19 -1's
 d$prestige_unlikeable <- 0
 d$prestige_unlikeable[d$prestige_likable == -1] <- 1
-d$prestige_likable[d$pretige_likable == -1] <- 0
+d$prestige_likable[d$prestige_likable == -1] <- 0
 
 # prestige_respected has 28 -1's
 d$prestige_not_respected <- 0
