@@ -8,7 +8,7 @@ library(stats)
 library(devtools)
 library(roxygen2)
 ####IMPORTING DATA SETS
-setwd("~/Documents/R/R projects/leadershipdata/data-raw")
+setwd("data-raw")
 ##Importing the intial data set that includes leadership models beyond those analyzed in the MA.
 
 #d<-read.csv("zg_leadership3.csv")
@@ -356,6 +356,8 @@ for (i in 11:29){
 #Which bits of evidence against to keep?
 t2 =t[t[,1]>0,]
 t2[(t2[,1]/t2[,3])>=.10,]
+
+leader_text_original <- d
 
 #Cut off rule, keep all evidence against when it's greater than or equal to 10% of the codes for t
 
