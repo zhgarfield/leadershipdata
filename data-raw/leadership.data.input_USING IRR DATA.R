@@ -8,7 +8,7 @@ library(stats)
 library(devtools)
 library(roxygen2)
 ####IMPORTING DATA SETS
-setwd("data-raw")
+setwd("~/Documents/R/R projects/leadershipdata/data-raw")
 ##Importing the intial data set that includes leadership models beyond those analyzed in the MA.
 
 #d<-read.csv("zg_leadership3.csv")
@@ -435,14 +435,17 @@ d.ct$settlement_fixity<-d.ct$settlement_fixity2
 d.ct$com_size<-d.ct$com_size2
 d.ct$pop_density<-d.ct$pop_density2
 
+doc_table<-read.csv('culture_totals.csv')
+doc_table<-doc_table[,c(1,14)]
+d.ct<-left_join(d.ct,doc_table)
+
 # d.ctPKG<-d.ct[,c(1:53,132:167)]
 d.ctPKG <- dplyr::select(d.ct,
-                         c_name:c_culture_code,
+                         c_name,c_culture_code,
                          Location,
-                         Documents,
                          V158.1,
                          c_cultural_complexity:hooper_total_against,
-                         neel_cult_score:pop_density
+                         neel_cult_score:documents
                          )
 
 
