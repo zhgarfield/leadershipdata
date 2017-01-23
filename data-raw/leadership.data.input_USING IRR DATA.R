@@ -224,12 +224,6 @@ d.ct2$c_name=d.ct2$Group.1
 #creating a dataframe of means values of variables at culture level (*d.ct3 is culture level data [means of variables] for variables )
 d.ct3 = aggregate(d[,14:37], by=list(d$c_name), FUN = mean)
 
-# Compute models scores by culture
-d$c_name<-factor(d$c_name)
-d.ct$neel_cult_score = as.numeric(by(d[,c('c_name', neel_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
-d.ct$prest_cult_score = as.numeric(by(d[,c('c_name', prest_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
-d.ct$dom_cult_score = as.numeric(by(d[,c('c_name', dom_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
-d.ct$hooper_cult_score = as.numeric(by(d[,c('c_name', hooper_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
 
 ##adding in some other culture level variables
 #d.ct2 <-merge(d.ct, d.ct2, by="c_name")
@@ -425,6 +419,14 @@ d$neel_intelligence[d$neel_intelligence == -1] <- 0
 d$prestige_counsel[d$prestige_counsel == -1] <- 0
 d$prestige_emulated[d$prestige_emulated == -1] <- 0
 d$prestige_expertise[d$prestige_expertise == -1] <- 0
+
+# Compute models scores by culture
+d$c_name<-factor(d$c_name)
+d.ct$neel_cult_score = as.numeric(by(d[,c('c_name', neel_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
+d.ct$prest_cult_score = as.numeric(by(d[,c('c_name', prest_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
+d.ct$dom_cult_score = as.numeric(by(d[,c('c_name', dom_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
+d.ct$hooper_cult_score = as.numeric(by(d[,c('c_name', hooper_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
+
 
 #Final renaming
 d$subsistence<-d$subsistence2
