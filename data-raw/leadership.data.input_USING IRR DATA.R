@@ -454,6 +454,8 @@ d.ctPKG <- dplyr::select(d.ct,
 leader_text<-dplyr::select(d,
                            cs_ID:evidence_hooper_against,
                            dom_for:region)
+leader_text<-leader_text[rowSums(leader_text[,c(14:37,71:80)])>0,]
+
 leader_cult<-d.ctPKG
 use_data(leader_text,leader_cult,leader_text_original,overwrite=TRUE)
 
