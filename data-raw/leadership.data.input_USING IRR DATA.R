@@ -15,6 +15,7 @@ setwd("~/Documents/R/R projects/leadershipdata/data-raw")
 d<-read.csv("ehraf_leadership_TOTAL_FINAL_IRR.csv")
 d<-d[c(1:1212),]
 
+
 ## Incorporating SCCS label, variables
 load('sccs.RData')
 sccs = as.data.frame(sccs)
@@ -65,6 +66,7 @@ tmp[tmp==-1] = 0
 tmp[tmp==-2] = -1
 d[,14:37] = tmp
 rm(tmp)
+
 
 ##Culture level data
 
@@ -229,14 +231,6 @@ d.ct3 = aggregate(d[,14:37], by=list(d$c_name), FUN = mean)
 #d.ct2 <-merge(d.ct, d.ct2, by="c_name")
 
 
-## PROBLEM HERE*****************************************
-present = function(x) {(sum(x) > 0)*1}
-
-d.ct = d %>%
-  group_by(c_name) %>%
-  dplyr::select(c_name, one_of(all_vars)) %>%
-  summarise_each(funs(present, mean)) %>%
-  left_join(d.ct, by='c_name')
 
 
 ## End
@@ -420,6 +414,19 @@ d$prestige_counsel[d$prestige_counsel == -1] <- 0
 d$prestige_emulated[d$prestige_emulated == -1] <- 0
 d$prestige_expertise[d$prestige_expertise == -1] <- 0
 
+#Remove cases of all 0s on theory variables
+d<-d[rowSums(d[,c(14:37,73:82)])>0,]
+
+
+## Compute mean and present variables at culture level
+present = function(x) {(sum(x) > 0)*1}
+
+d.ct = d %>%
+  group_by(c_name) %>%
+  dplyr::select(c_name, one_of(all_vars)) %>%
+  summarise_each(funs(present, mean)) %>%
+  left_join(d.ct, by='c_name')
+
 # Compute models scores by culture
 d$c_name<-factor(d$c_name)
 d.ct$neel_cult_score = as.numeric(by(d[,c('c_name', neel_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
@@ -454,7 +461,6 @@ d.ctPKG <- dplyr::select(d.ct,
 leader_text<-dplyr::select(d,
                            cs_ID:evidence_hooper_against,
                            dom_for:region)
-leader_text<-leader_text[rowSums(leader_text[,c(14:37,71:80)])>0,]
 
 leader_cult<-d.ctPKG
 use_data(leader_text,leader_cult,leader_text_original,overwrite=TRUE)
