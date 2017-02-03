@@ -443,14 +443,15 @@ d.ct$region<-d.ct$region2
 d.ct$settlement_fixity<-d.ct$settlement_fixity2
 d.ct$com_size<-d.ct$com_size2
 d.ct$pop_density<-d.ct$pop_density2
+d.ct$c_cultural_complexity[d.ct$c_name=='Hopi'] = 35
+d.ct$c_cultural_complexity[d.ct$c_name=='Mataco'] = 18
 
 doc_table<-read.csv('culture_totals.csv')
 doc_table<-doc_table[,c(1,14)]
 d.ct<-left_join(d.ct,doc_table)
 
 # d.ctPKG<-d.ct[,c(1:53,132:167)]
-d.ct$c_cultural_complexity[d.ct$c_name=='Hopi'] = 35
-d.ct$c_cultural_complexity[d.ct$c_name=='Mataco'] = 18
+
 
 d.ctPKG <- dplyr::select(d.ct,
                          c_name,c_culture_code,
