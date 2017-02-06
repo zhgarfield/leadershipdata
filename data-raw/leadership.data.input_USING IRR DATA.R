@@ -8,7 +8,7 @@ library(stats)
 library(devtools)
 library(roxygen2)
 ####IMPORTING DATA SETS
-setwd("~/Documents/R/R projects/leadershipdata/data-raw")
+setwd("data-raw")
 ##Importing the intial data set that includes leadership models beyond those analyzed in the MA.
 
 #d<-read.csv("zg_leadership3.csv")
@@ -450,7 +450,7 @@ doc_table<-read.csv('culture_totals.csv')
 doc_table<-doc_table[,c(1,14)]
 d.ct<-left_join(d.ct,doc_table)
 
-d_raw.text<-read.csv("raw_text.csv")
+d_raw.text<-read.csv("raw_text.csv", stringsAsFactors = F)
 d_raw.text$cs_textrec_ID<-d_raw.text$t_ID
 d_raw.text$raw_text<-d_raw.text$t_text
 d_final<-left_join(d,d_raw.text, by="cs_textrec_ID")
