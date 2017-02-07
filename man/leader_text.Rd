@@ -89,4 +89,3 @@ leader_text
 1200+ ethnographic text coded as evidence for, against, no evidence on variables from theories of leadership.
 }
 \keyword{datasets}
-

@@ -8,7 +8,7 @@ library(stats)
 library(devtools)
 library(roxygen2)
 ####IMPORTING DATA SETS
-#setwd("data-raw")
+setwd("~/Documents/R/R projects/leadershipdata/data-raw")
 ##Importing the intial data set that includes leadership models beyond those analyzed in the MA.
 
 #d<-read.csv("zg_leadership3.csv")
