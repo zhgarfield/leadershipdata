@@ -8,7 +8,7 @@ library(stats)
 library(devtools)
 library(roxygen2)
 ####IMPORTING DATA SETS
-setwd("data-raw")
+#setwd("data-raw")
 ##Importing the intial data set that includes leadership models beyond those analyzed in the MA.
 
 #d<-read.csv("zg_leadership3.csv")
@@ -450,9 +450,10 @@ doc_table<-read.csv('culture_totals.csv')
 doc_table<-doc_table[,c(1,14)]
 d.ct<-left_join(d.ct,doc_table)
 
-d_raw.text<-read.csv("raw_text.csv", stringsAsFactors = F)
-d_raw.text$cs_textrec_ID<-d_raw.text$t_ID
+d_raw.text<-read.csv("raw_text2.csv", stringsAsFactors = F)
 d_raw.text$raw_text<-d_raw.text$t_text
+d_raw.text<-d_raw.text[,c("cs_textrec_ID","raw_text")]
+
 d_final<-left_join(d,d_raw.text, by="cs_textrec_ID")
 
 # d.ctPKG<-d.ct[,c(1:53,132:167)]
@@ -471,7 +472,7 @@ d.ctPKG <- dplyr::select(d.ct,
 
 leader_text<-dplyr::select(d_final,
                            cs_ID:evidence_hooper_against,
-                           dom_for:region,split_record,raw_text)
+                           dom_for:raw_text)
 
 leader_cult<-d.ctPKG
 use_data(leader_text,leader_cult,leader_text_original,overwrite=TRUE)
