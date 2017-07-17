@@ -8,16 +8,14 @@ library(stats)
 library(devtools)
 library(roxygen2)
 ####IMPORTING DATA SETS
-setwd("~/Documents/R/R projects/leadershipdata/data-raw")
-##Importing the intial data set that includes leadership models beyond those analyzed in the MA.
 
 #d<-read.csv("zg_leadership3.csv")
-d<-read.csv("ehraf_leadership_TOTAL_FINAL_IRR.csv")
+d<-read.csv("data-raw/ehraf_leadership_TOTAL_FINAL_IRR.csv")
 d<-d[c(1:1212),]
 
 
 ## Incorporating SCCS label, variables
-load('sccs.RData')
+load('data-raw/sccs.RData')
 sccs = as.data.frame(sccs)
 # ID's of SCCS cultures that correspond to HRAF probability sample cultures
 sccs.nums=c(19,37,79,172,28,7,140,76,121,109,124,24,87,12,69,181,26,51,149,85,112,125,16,94,138,116,158,57,102,4,34,182,13,127,52,62,165,48,42,36,113,152,100,16,132,98,167,154,21,120)
@@ -32,11 +30,11 @@ sccs.vars=c('SOCNAME','V61','V63', 'V64', 'V69','V70', 'V73', 'V76', 'V77',  'V7
             'V795', 'V796', 'V835', 'V836', 'V860', 'V866', 'V867', 'V868', 'V869', 'V902', 'V903', 'V905',
             'V907', 'V910', 'V1133', 'V1134', 'V1683', 'V1684', 'V1685')
 sccs.2=sccs[sccs.nums,sccs.vars]
-Culture.codes <- read.delim("Culture codes.txt")
+Culture.codes <- read.delim("data-raw/Culture codes.txt")
 
 Culture.codes$SCCS = as.character(Culture.codes$SCCS)
 sccs.2 = merge(sccs.2, Culture.codes, by.x='row.names', by.y='SCCS')
-cultures <- read.delim("cultures.txt")
+cultures <- read.delim("data-raw/cultures.txt")
 cultures = merge(cultures, sccs.2, by='Culture.code', all=T)
 rm(sccs.2)
 
@@ -73,7 +71,7 @@ rm(tmp)
 # Try to replicate d.ct in R
 # PSF has Bahia Brazilians, but no leadership extracts from that culture, so delete that row
 
-d.ct = read.csv('culture_fmpro2.csv', stringsAsFactors=F)
+d.ct = read.csv('data-raw/culture_fmpro2.csv', stringsAsFactors=F)
 d.ct = filter(d.ct, c_name != 'Bahia Brazilians ') # Not in d
 d.ct = left_join(d.ct, table(d$c_name), by=c('c_name'='Var1'), copy=T)
 #d.ct = rename(d.ct, extract_count=Freq)
@@ -164,10 +162,10 @@ d$evidence_hooper_against = (rowSums(d[,hooper_vars]==-1))
 
 
 ## making data set of model totals by subsistence type - include total for, total against for each model (*d.sub is subsistence level, not used in main analyses)
-d.sub <-read.csv("d.sub_by_model_totals.csv")
+d.sub <-read.csv("data-raw/d.sub_by_model_totals.csv")
 
 ##Creating data set of variable list with proportions (*d.prop is list of proportions at model level for extracts)
-d.prop <-read.csv("d.prop.csv")
+d.prop <-read.csv("data-raw/d.prop.csv")
 
 ##Merging cultures data with d.ct
 
@@ -446,11 +444,11 @@ d.ct$pop_density<-d.ct$pop_density2
 d.ct$c_cultural_complexity[d.ct$c_name=='Hopi'] = 35
 d.ct$c_cultural_complexity[d.ct$c_name=='Mataco'] = 18
 
-doc_table<-read.csv('culture_totals.csv')
+doc_table<-read.csv('data-raw/culture_totals.csv')
 doc_table<-doc_table[,c(1,14)]
 d.ct<-left_join(d.ct,doc_table)
 
-d_raw.text<-read.csv("raw_text2.csv", stringsAsFactors = F)
+d_raw.text<-read.csv("data-raw/raw_text2.csv", stringsAsFactors = F)
 d_raw.text$raw_text<-d_raw.text$t_text
 d_raw.text<-d_raw.text[,c("cs_textrec_ID","raw_text")]
 
