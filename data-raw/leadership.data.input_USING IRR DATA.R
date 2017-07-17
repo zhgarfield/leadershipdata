@@ -73,8 +73,7 @@ rm(tmp)
 
 d.ct = read.csv('data-raw/culture_fmpro2.csv', stringsAsFactors=F)
 d.ct = filter(d.ct, c_name != 'Bahia Brazilians ') # Not in d
-d.ct = left_join(d.ct, table(d$c_name), by=c('c_name'='Var1'), copy=T)
-#d.ct = rename(d.ct, extract_count=Freq)
+d.ct = left_join(d.ct, as.data.frame(table(d$c_name), stringsAsFactors = F), by=c('c_name'='Var1'))
 d.ct=dplyr::rename(d.ct, extract_count = Freq)
 
 # This function calculates the total +1, 0, or -1 for a set of model vars (e.g., neel_vars) for each culture (on d3)
