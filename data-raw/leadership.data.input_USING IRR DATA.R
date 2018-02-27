@@ -454,8 +454,8 @@ d_raw.text<-d_raw.text[,c("cs_textrec_ID","raw_text")]
 d_final<-left_join(d,d_raw.text, by="cs_textrec_ID")
 
 # d.ctPKG<-d.ct[,c(1:53,132:167)]
-d.ct[d.ct$subsistence=="other"] = "mixed"
-d.ct[d.ct$subsistence2=="other"] = "mixed"
+levels(d.ct$subsistence) <-c("agriculturalists", "horticulturalists", "hunter gatherers", "mixed", "pastoralists")
+levels(d.ct$subsistence2) <-c("agriculturalists", "horticulturalists", "hunter gatherers", "mixed", "pastoralists")
 
 
 d.ctPKG <- dplyr::select(d.ct,
