@@ -381,11 +381,6 @@ d$prestige_no_family_prestige <- 0
 d$prestige_no_family_prestige[d$prestige_family == -1] <- 1
 d$prestige_family[d$prestige_family == -1] <- 0
 
-# prestige_emulated has 1 -1's (to 8 1's)
-d$prestige_not_emulated <- 0
-d$prestige_not_emulated[d$prestige_emulated == -1] <- 1
-d$prestige_emulated[d$pretige_emulated == -1] <- 0
-
 # prestige_likable has 19 -1's
 d$prestige_unlikeable <- 0
 d$prestige_unlikeable[d$prestige_likable == -1] <- 1
@@ -412,7 +407,7 @@ d$prestige_emulated[d$prestige_emulated == -1] <- 0
 d$prestige_expertise[d$prestige_expertise == -1] <- 0
 
 #Remove cases of all 0s on theory variables
-d<-d[rowSums(d[,c(14:37,73:82)])>0,]
+d<-d[rowSums(d[,c(14:37,73:81)])>0,]
 
 
 ## Compute mean and present variables at culture level
