@@ -406,6 +406,9 @@ d$prestige_counsel[d$prestige_counsel == -1] <- 0
 d$prestige_emulated[d$prestige_emulated == -1] <- 0
 d$prestige_expertise[d$prestige_expertise == -1] <- 0
 
+#Fix emulated coding
+d$prestige_emulated[d$cs_textrec_ID==1092] <- 1
+
 #Remove cases of all 0s on theory variables
 d<-d[rowSums(d[,c(14:37,73:81)])>0,]
 
