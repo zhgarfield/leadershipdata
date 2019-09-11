@@ -1,13 +1,13 @@
 ## Import all data into data frames and recode as necessary
 
-library(dplyr)
-library(tidyr)
+library(tidyverse)
 library(car)
 library(reshape2)
 library(stats)
 library(devtools)
 library(roxygen2)
 library(readr)
+library(readxl)
 
 ####IMPORTING DATA SETS
 
@@ -481,6 +481,14 @@ leader_cult<-d.ctPKG
 text_records <- d_raw.text
 
 
+# Import documents data frame ---------------------------------------------
+
+documents <- read_excel("data-raw/documents_data.xlsx")
+tmp <-
+  names(documents) %>%
+  str_replace("document::", "")
+names(documents) <- tmp
+
 # Text record coding related to leadership costs, benefits, qualit --------
 # qualities, functions, and group structure
 
@@ -493,5 +501,5 @@ leader_text2 <- d2
 
 # Write data --------------------------------------------------------------
 
-use_data(leader_text,leader_cult,leader_text_original,text_records,leader_text2,overwrite=TRUE)
+use_data(documents,leader_text,leader_cult,leader_text_original,text_records,leader_text2,overwrite=TRUE)
 
