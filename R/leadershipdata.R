@@ -173,3 +173,15 @@
 #'   \item{\code{dom_cult_score}}{double. DESCRIPTION.}
 #' }
 "leader_cult"
+
+
+#' Text records
+#'
+#' The raw text from the eHRAF paragraphs that were coded on multiple variables related to leadership.
+#'
+#' @format A data frame with 1212 rows and 2 variables:
+#' \describe{
+#'   \item{\code{cs_textrec_ID}}{double. Text record ID.}
+#'   \item{\code{raw_text}}{character. The complete eHRAF paragraph text that was coded.}
+#' }
+"text_records"

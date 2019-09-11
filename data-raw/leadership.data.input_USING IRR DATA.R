@@ -7,6 +7,8 @@ library(reshape2)
 library(stats)
 library(devtools)
 library(roxygen2)
+library(readr)
+
 ####IMPORTING DATA SETS
 
 #d<-read.csv("zg_leadership3.csv")
@@ -472,5 +474,24 @@ leader_text<-dplyr::select(d_final,
                            dom_for:raw_text)
 
 leader_cult<-d.ctPKG
-use_data(leader_text,leader_cult,leader_text_original,overwrite=TRUE)
+
+
+# Rename text record data frame -------------------------------------------
+
+text_records <- d_raw.text
+
+
+# Text record coding related to leadership costs, benefits, qualit --------
+# qualities, functions, and group structure
+
+d2 <- read_csv("data-raw/reconciled_coding2.csv")
+
+
+
+# Rename data frame
+leader_text2 <- d2
+
+# Write data --------------------------------------------------------------
+
+use_data(leader_text,leader_cult,leader_text_original,text_records,leader_text2,overwrite=TRUE)
 
