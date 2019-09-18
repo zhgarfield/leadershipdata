@@ -447,9 +447,9 @@ doc_table<-read.csv('data-raw/culture_totals.csv')
 doc_table<-doc_table[,c(1,14)]
 d.ct<-left_join(d.ct,doc_table)
 
-d_raw.text<-read.csv("data-raw/raw_text2.csv", stringsAsFactors = F)
+d_raw.text<-read_csv("data-raw/raw_text_updated.csv")
 d_raw.text$raw_text<-d_raw.text$t_text
-d_raw.text<-d_raw.text[,c("cs_textrec_ID","raw_text")]
+d_raw.text<-d_raw.text[,c("document_d_ID", "cs_textrec_ID", "t_split_record", "t_split_record_info", "raw_text")]
 
 d_final<-left_join(d,d_raw.text, by="cs_textrec_ID")
 
@@ -483,7 +483,7 @@ text_records <- d_raw.text
 
 # Import documents data frame ---------------------------------------------
 
-documents <- read_excel("data-raw/documents_data.xlsx")
+documents <- read_excel("data-raw/documents.xlsx")
 tmp <-
   names(documents) %>%
   str_replace("document::", "")
@@ -494,7 +494,8 @@ names(documents) <- tmp
 
 d2 <- read_csv("data-raw/reconciled_coding2.csv")
 
-
+#Reset code sheet IDs for d2 (leader_text2) to avoid any confusion with leader_text coding.
+d2$cs_ID<-seq.int(20001,21212)
 
 # Rename data frame
 leader_text2 <- d2
