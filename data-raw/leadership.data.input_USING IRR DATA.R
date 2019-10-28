@@ -418,10 +418,10 @@ d<-d[rowSums(d[,c(14:37,73:81)])>0,]
 ## Compute mean and present variables at culture level
 present = function(x) {(sum(x) > 0)*1}
 
-d.ct = d %>%
-  group_by(c_name) %>%
+d.ct <- d %>%
   dplyr::select(c_name, one_of(all_vars)) %>%
-  summarise_each(funs(present, mean)) %>%
+  group_by(c_name) %>%
+  summarise_each(funs(present,mean)) %>%
   left_join(d.ct, by='c_name')
 
 # Compute models scores by culture
@@ -466,14 +466,16 @@ d.ctPKG <- dplyr::select(d.ct,
                          neel_cult_score:documents
                          )
 
-
+leader_cult <- cultures %>%
+  dplyr::select(c_culture_code, Name, Region) %>%
+  left_join(d.ctPKG, by = 'c_culture_code')
 
 
 leader_text<-dplyr::select(d_final,
                            cs_ID:evidence_hooper_against,
                            dom_for:raw_text)
 
-leader_cult<-d.ctPKG
+
 
 
 # Rename text record data frame -------------------------------------------
