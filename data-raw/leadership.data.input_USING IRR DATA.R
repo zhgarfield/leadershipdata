@@ -73,10 +73,11 @@ rm(tmp)
 # Try to replicate d.ct in R
 # PSF has Bahia Brazilians, but no leadership extracts from that culture, so delete that row
 
-d.ct = read.csv('data-raw/culture_fmpro2.csv', stringsAsFactors=F)
-d.ct = filter(d.ct, c_name != 'Bahia Brazilians ') # Not in d
-d.ct = left_join(d.ct, as.data.frame(table(d$c_name), stringsAsFactors = F), by=c('c_name'='Var1'))
-d.ct=dplyr::rename(d.ct, extract_count = Freq)
+d.ct <-
+  read.csv('data-raw/culture_fmpro2.csv', stringsAsFactors=F) %>%
+  filter(c_name != 'Bahia Brazilians ') %>%  # Not in d
+  left_join(as.data.frame(table(d$c_name), stringsAsFactors = F), by=c('c_name'='Var1')) %>%
+  rename(extract_count = Freq)
 
 # This function calculates the total +1, 0, or -1 for a set of model vars (e.g., neel_vars) for each culture (on d3)
 # Set 'vars' to the model variables and val to +1, 0, or -1
@@ -421,15 +422,30 @@ present = function(x) {(sum(x) > 0)*1}
 d.ct <- d %>%
   dplyr::select(c_name, one_of(all_vars)) %>%
   group_by(c_name) %>%
-  summarise_each(funs(present,mean)) %>%
-  left_join(d.ct, by='c_name')
+  summarise_all(funs(present,mean)) %>%
+  right_join(d.ct, by='c_name')
 
 # Compute models scores by culture
-d$c_name<-factor(d$c_name)
-d.ct$neel_cult_score = as.numeric(by(d[,c('c_name', neel_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
-d.ct$prest_cult_score = as.numeric(by(d[,c('c_name', prest_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
-d.ct$dom_cult_score = as.numeric(by(d[,c('c_name', dom_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
-d.ct$hooper_cult_score = as.numeric(by(d[,c('c_name', hooper_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
+
+## Left off here Oct 30, 2019
+## Need to add model scores to d.ct, which has 1 extra row (59)
+## Possible strategy: create data frame with the 58 rows
+## for which we have data, and then merge with d.ct, which has all 59 rows
+
+df_modelscores <-
+  tibble(
+    c_name = factor(unique(d$c_name)),
+    neel_cult_score = as.numeric(by(d[,c('c_name', neel_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T))),
+    prest_cult_score = as.numeric(by(d[,c('c_name', prest_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T))),
+    dom_cult_score = as.numeric(by(d[,c('c_name', dom_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T))),
+    hooper_cult_score = as.numeric(by(d[,c('c_name', hooper_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
+  )
+
+# d$c_name<-factor(d$c_name)
+# d.ct$neel_cult_score = as.numeric(by(d[,c('c_name', neel_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
+# d.ct$prest_cult_score = as.numeric(by(d[,c('c_name', prest_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
+# d.ct$dom_cult_score = as.numeric(by(d[,c('c_name', dom_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
+# d.ct$hooper_cult_score = as.numeric(by(d[,c('c_name', hooper_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
 
 
 #Final renaming
@@ -504,5 +520,5 @@ leader_text2 <- d2
 
 # Write data --------------------------------------------------------------
 
-use_data(documents,leader_text,leader_cult,leader_text_original,text_records,leader_text2,overwrite=TRUE)
+# use_data(documents,leader_text,leader_cult,leader_text_original,text_records,leader_text2,overwrite=TRUE)
 
