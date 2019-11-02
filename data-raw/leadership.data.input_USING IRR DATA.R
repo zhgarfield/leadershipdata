@@ -532,5 +532,5 @@ leader_text2 <- d2
 
 # Write data --------------------------------------------------------------
 
-# use_data(documents,leader_text,leader_cult,leader_text_original,text_records,leader_text2,overwrite=TRUE)
+use_data(documents,leader_text,leader_cult,leader_text_original,text_records,leader_text2,overwrite=TRUE)
 
