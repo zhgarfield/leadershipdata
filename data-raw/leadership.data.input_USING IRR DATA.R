@@ -432,14 +432,26 @@ d.ct <- d %>%
 ## Possible strategy: create data frame with the 58 rows
 ## for which we have data, and then merge with d.ct, which has all 59 rows
 
+# Create a data frame of just the 58 cultures first
+d_58<-d[!d$c_name=="Saramaka",]
+d_58$c_name<-factor(d_58$c_name)
+
+library(data.table)
+d_58<-setorder(d_58, c_name)
+
+# Calculate model scores
 df_modelscores <-
   tibble(
-    c_name = factor(unique(d$c_name)),
-    neel_cult_score = as.numeric(by(d[,c('c_name', neel_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T))),
-    prest_cult_score = as.numeric(by(d[,c('c_name', prest_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T))),
-    dom_cult_score = as.numeric(by(d[,c('c_name', dom_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T))),
-    hooper_cult_score = as.numeric(by(d[,c('c_name', hooper_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
+    c_name = factor(unique(d_58$c_name)),
+    neel_cult_score = as.numeric(by(d_58[,c('c_name', neel_vars)], d_58$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T))),
+    prest_cult_score = as.numeric(by(d_58[,c('c_name', prest_vars)], d_58$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T))),
+    dom_cult_score = as.numeric(by(d_58[,c('c_name', dom_vars)], d_58$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T))),
+    hooper_cult_score = as.numeric(by(d_58[,c('c_name', hooper_vars)], d_58$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
   )
+
+# Merge model scores into d.ct
+
+d.ct <- left_join(d.ct, df_modelscores, by = "c_name")
 
 # d$c_name<-factor(d$c_name)
 # d.ct$neel_cult_score = as.numeric(by(d[,c('c_name', neel_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
