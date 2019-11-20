@@ -530,6 +530,44 @@ d2$cs_ID<-seq.int(20001,21212)
 # Rename data frame
 leader_text2 <- d2
 
+# Recode variables --------------------------------------------------------
+
+# Add sex
+leader_text2 <- left_join(leader_text2, leader_text_original[c("cs_textrec_ID", "demo_sex")])
+
+# Aggregate group structure types
+
+group_str <- c(
+  "state-level group" = "state-level group",
+  "religeous group" = "religious group", # correct spelling
+  "political group" = "political group",
+  "military group" = "military group",
+  "economic group" = "economic group",
+  "criminal group" = "economic group",
+  "labor group" = "economic group",
+  "subsistence group" = "economic group",
+  "age-group" = "social group",
+  "domestic group" = "social group",
+  "kin group" = "social group",
+  "local group" = "social group",
+  "performance group" = "social group",
+  "other" = "other",
+  "multiple domains" = "other",
+  "unkown" = "other"
+)
+
+leader_text2$group.structure2 <- leader_text2$group.structure.coded
+leader_text2$group.structure2 <- group_str[leader_text2$group.structure2]
+
+# Convert factors to chars ------------------------------------------------
+
+documents <- mutate_if(documents, is.factor, as.character)
+leader_text <- mutate_if(leader_text, is.factor, as.character)
+leader_cult <- mutate_if(leader_cult, is.factor, as.character)
+leader_text_original <- mutate_if(leader_text_original, is.factor, as.character)
+text_records <- mutate_if(text_records, is.factor, as.character)
+leader_text2 <- mutate_if(leader_text2, is.factor, as.character)
+
 # Write data --------------------------------------------------------------
 
 use_data(documents,leader_text,leader_cult,leader_text_original,text_records,leader_text2,overwrite=TRUE)
