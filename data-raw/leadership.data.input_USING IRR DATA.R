@@ -16,7 +16,9 @@ d<-read.csv("data-raw/ehraf_leadership_TOTAL_FINAL_IRR.csv")
 d<-d[c(1:1212),]
 
 
-## Incorporating SCCS label, variables
+
+# Incorporating SCCS label, variables -------------------------------------
+
 load('data-raw/sccs.RData')
 sccs = as.data.frame(sccs)
 # ID's of SCCS cultures that correspond to HRAF probability sample cultures
@@ -30,7 +32,7 @@ sccs.vars=c('SOCNAME','V61','V63', 'V64', 'V69','V70', 'V73', 'V76', 'V77',  'V7
             'V756', 'V758', 'V759', 'V760', 'V761', 'V762', 'V763', 'V764', 'V765', 'V766', 'V767',
             'V768', 'V769', 'V770', 'V773', 'V774', 'V775', 'V777', 'V778', 'V780', 'V785', 'V793', 'V794',
             'V795', 'V796', 'V835', 'V836', 'V860', 'V866', 'V867', 'V868', 'V869', 'V902', 'V903', 'V905',
-            'V907', 'V910', 'V1133', 'V1134', 'V1683', 'V1684', 'V1685')
+            'V907', 'V910', 'V1133', 'V1134', 'V1648', 'V1683', 'V1684', 'V1685')
 sccs.2=sccs[sccs.nums,sccs.vars]
 Culture.codes <- read.delim("data-raw/Culture codes.txt")
 
