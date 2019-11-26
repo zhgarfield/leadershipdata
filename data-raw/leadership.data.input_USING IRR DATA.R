@@ -16,7 +16,9 @@ d<-read.csv("data-raw/ehraf_leadership_TOTAL_FINAL_IRR.csv")
 d<-d[c(1:1212),]
 
 
-## Incorporating SCCS label, variables
+
+# Incorporating SCCS label, variables -------------------------------------
+
 load('data-raw/sccs.RData')
 sccs = as.data.frame(sccs)
 # ID's of SCCS cultures that correspond to HRAF probability sample cultures
@@ -30,7 +32,7 @@ sccs.vars=c('SOCNAME','V61','V63', 'V64', 'V69','V70', 'V73', 'V76', 'V77',  'V7
             'V756', 'V758', 'V759', 'V760', 'V761', 'V762', 'V763', 'V764', 'V765', 'V766', 'V767',
             'V768', 'V769', 'V770', 'V773', 'V774', 'V775', 'V777', 'V778', 'V780', 'V785', 'V793', 'V794',
             'V795', 'V796', 'V835', 'V836', 'V860', 'V866', 'V867', 'V868', 'V869', 'V902', 'V903', 'V905',
-            'V907', 'V910', 'V1133', 'V1134', 'V1683', 'V1684', 'V1685')
+            'V907', 'V910', 'V1133', 'V1134', 'V1648', 'V1683', 'V1684', 'V1685')
 sccs.2=sccs[sccs.nums,sccs.vars]
 Culture.codes <- read.delim("data-raw/Culture codes.txt")
 
@@ -73,10 +75,11 @@ rm(tmp)
 # Try to replicate d.ct in R
 # PSF has Bahia Brazilians, but no leadership extracts from that culture, so delete that row
 
-d.ct = read.csv('data-raw/culture_fmpro2.csv', stringsAsFactors=F)
-d.ct = filter(d.ct, c_name != 'Bahia Brazilians ') # Not in d
-d.ct = left_join(d.ct, as.data.frame(table(d$c_name), stringsAsFactors = F), by=c('c_name'='Var1'))
-d.ct=dplyr::rename(d.ct, extract_count = Freq)
+d.ct <-
+  read.csv('data-raw/culture_fmpro2.csv', stringsAsFactors=F) %>%
+  filter(c_name != 'Bahia Brazilians ') %>%  # Not in d
+  left_join(as.data.frame(table(d$c_name), stringsAsFactors = F), by=c('c_name'='Var1')) %>%
+  rename(extract_count = Freq)
 
 # This function calculates the total +1, 0, or -1 for a set of model vars (e.g., neel_vars) for each culture (on d3)
 # Set 'vars' to the model variables and val to +1, 0, or -1
@@ -418,18 +421,45 @@ d<-d[rowSums(d[,c(14:37,73:81)])>0,]
 ## Compute mean and present variables at culture level
 present = function(x) {(sum(x) > 0)*1}
 
-d.ct = d %>%
-  group_by(c_name) %>%
+d.ct <- d %>%
   dplyr::select(c_name, one_of(all_vars)) %>%
-  summarise_each(funs(present, mean)) %>%
-  left_join(d.ct, by='c_name')
+  group_by(c_name) %>%
+  summarise_all(funs(present,mean)) %>%
+  right_join(d.ct, by='c_name')
 
 # Compute models scores by culture
-d$c_name<-factor(d$c_name)
-d.ct$neel_cult_score = as.numeric(by(d[,c('c_name', neel_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
-d.ct$prest_cult_score = as.numeric(by(d[,c('c_name', prest_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
-d.ct$dom_cult_score = as.numeric(by(d[,c('c_name', dom_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
-d.ct$hooper_cult_score = as.numeric(by(d[,c('c_name', hooper_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
+
+## Left off here Oct 30, 2019
+## Need to add model scores to d.ct, which has 1 extra row (59)
+## Possible strategy: create data frame with the 58 rows
+## for which we have data, and then merge with d.ct, which has all 59 rows
+
+# Create a data frame of just the 58 cultures first
+d_58<-d[!d$c_name=="Saramaka",]
+d_58$c_name<-factor(d_58$c_name)
+
+library(data.table)
+d_58<-setorder(d_58, c_name)
+
+# Calculate model scores
+df_modelscores <-
+  tibble(
+    c_name = factor(unique(d_58$c_name)),
+    neel_cult_score = as.numeric(by(d_58[,c('c_name', neel_vars)], d_58$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T))),
+    prest_cult_score = as.numeric(by(d_58[,c('c_name', prest_vars)], d_58$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T))),
+    dom_cult_score = as.numeric(by(d_58[,c('c_name', dom_vars)], d_58$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T))),
+    hooper_cult_score = as.numeric(by(d_58[,c('c_name', hooper_vars)], d_58$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
+  )
+
+# Merge model scores into d.ct
+
+d.ct <- left_join(d.ct, df_modelscores, by = "c_name")
+
+# d$c_name<-factor(d$c_name)
+# d.ct$neel_cult_score = as.numeric(by(d[,c('c_name', neel_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
+# d.ct$prest_cult_score = as.numeric(by(d[,c('c_name', prest_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
+# d.ct$dom_cult_score = as.numeric(by(d[,c('c_name', dom_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
+# d.ct$hooper_cult_score = as.numeric(by(d[,c('c_name', hooper_vars)], d$c_name, FUN=function(x) mean(as.matrix(x[,-1]), na.rm=T)))
 
 
 #Final renaming
@@ -466,14 +496,16 @@ d.ctPKG <- dplyr::select(d.ct,
                          neel_cult_score:documents
                          )
 
-
+leader_cult <- cultures %>%
+  dplyr::select(c_culture_code, Name, Region) %>%
+  left_join(d.ctPKG, by = 'c_culture_code')
 
 
 leader_text<-dplyr::select(d_final,
                            cs_ID:evidence_hooper_against,
                            dom_for:raw_text)
 
-leader_cult<-d.ctPKG
+
 
 
 # Rename text record data frame -------------------------------------------
@@ -499,6 +531,44 @@ d2$cs_ID<-seq.int(20001,21212)
 
 # Rename data frame
 leader_text2 <- d2
+
+# Recode variables --------------------------------------------------------
+
+# Add sex
+leader_text2 <- left_join(leader_text2, leader_text_original[c("cs_textrec_ID", "demo_sex")])
+
+# Aggregate group structure types
+
+group_str <- c(
+  "state-level group" = "state-level group",
+  "religeous group" = "religious group", # correct spelling
+  "political group" = "political group",
+  "military group" = "military group",
+  "economic group" = "economic group",
+  "criminal group" = "economic group",
+  "labor group" = "economic group",
+  "subsistence group" = "economic group",
+  "age-group" = "social group",
+  "domestic group" = "social group",
+  "kin group" = "social group",
+  "local group" = "social group",
+  "performance group" = "social group",
+  "other" = "other",
+  "multiple domains" = "other",
+  "unkown" = "other"
+)
+
+leader_text2$group.structure2 <- leader_text2$group.structure.coded
+leader_text2$group.structure2 <- group_str[leader_text2$group.structure2]
+
+# Convert factors to chars ------------------------------------------------
+
+documents <- mutate_if(documents, is.factor, as.character)
+leader_text <- mutate_if(leader_text, is.factor, as.character)
+leader_cult <- mutate_if(leader_cult, is.factor, as.character)
+leader_text_original <- mutate_if(leader_text_original, is.factor, as.character)
+text_records <- mutate_if(text_records, is.factor, as.character)
+leader_text2 <- mutate_if(leader_text2, is.factor, as.character)
 
 # Write data --------------------------------------------------------------
 
