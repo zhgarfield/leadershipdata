@@ -535,24 +535,28 @@ leader_text2 <- d2
 # Recode variables --------------------------------------------------------
 
 # Add sex
+leader_text_original$demo_sex <- as.character(leader_text_original$demo_sex)
+leader_text_original$demo_sex[leader_text_original$demo_sex == "-1"] <- "male"
+leader_text_original$demo_sex[leader_text_original$demo_sex == "unkown"] <- "unknown"
 leader_text2 <- left_join(leader_text2, leader_text_original[c("cs_textrec_ID", "demo_sex")])
 
 # Aggregate group structure types
 
 group_str <- c(
-  "state-level group" = "state-level group",
+  "state-level group" = "political group (supracommunity)",
   "religeous group" = "religious group", # correct spelling
-  "political group" = "political group",
+  "political group (community)" = "political group (community)",
+  "political group (supracommunity)" = "political group (supracommunity)",
   "military group" = "military group",
   "economic group" = "economic group",
   "criminal group" = "economic group",
   "labor group" = "economic group",
   "subsistence group" = "economic group",
-  "age-group" = "social group",
-  "domestic group" = "social group",
-  "kin group" = "social group",
-  "local group" = "social group",
-  "performance group" = "social group",
+  "age-group" = "residential subgroup",
+  "domestic group" = "kin group",
+  "kin group" = "kin group",
+  "local group" = "residential subgroup",
+  "performance group" = "residential subgroup",
   "other" = "other",
   "multiple domains" = "other",
   "unkown" = "other"
