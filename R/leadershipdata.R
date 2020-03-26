@@ -80,7 +80,6 @@
 #' @source \url{http://www.ehrafsite.info/}
 "leader_text_original"
 
-
 #' @title Researcher-coded text-level data from HRAF variables: Study 1, Garfield, Hubbard, & Hagen (2019). See text: https://link.springer.com/article/10.1007/s12110-019-09338-4
 #' @description 1000 ethnographic texts coded as evidence for or against on variables from three theories of leadership: the dominance-prestige model, the collective action model, and the neural capital and reproductive skew model.
 #' @format A data frame with 1000 rows and 85 variables:
