@@ -1,8 +1,8 @@
 Package: leadershipdata
 Title: Coding of all HRAF data on leadership
-Version: 0.0.0.9001
+Version: 1.0.0.0001
 Authors@R: person("Zachary", "Garfield", email = "zachary.garfield@wsu.edu", role = c("aut", "cre"))
-Description: insert Abstract
+Description: The leadershipdata package provides researcher-coded variables on a sample of ethnographic paragraphs extracted from the electronic Human Relations Area Files. Data were used to produce the publication, Garfield, Z.H., Hubbard, R.L. & Hagen, E.H. Evolutionary Models of Leadership. Hum Nat 30, 23–58 (2019). https://doi.org/10.1007/s12110-019-09338-4; as well as Garfield, Syme, & Hagen (under review, 2020). See texts for additional details. Version 1.0.0.0001 includes additional researcher-coded data and additional data on authorship. 
 Depends:
     R (>= 3.1.0)
 License: CC0

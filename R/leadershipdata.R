@@ -375,4 +375,19 @@
 #' @source \url{https://hraf.yale.edu/document-collections-in-ehraf/}
 "documents"
 
+#' @title Authorship data
+#' @description Data on authors and authorship associated with "documents" data frame.
+#' @format A data frame with 357 rows and 7 variables:
+#' \describe{
+#'   \item{\code{author_ID}}{character Internally assigned author ID, unique to each author.}
+#'   \item{\code{document_ID}}{character HRAF document ID}
+#'   \item{\code{authorship_ID}}{double Internally assigned authorship ID, unique to each case of authorship.}
+#'   \item{\code{authorship_order}}{character The authorship order, i.e., sole, first, second, third, fourth.}
+#'   \item{\code{author_first_name}}{character Author's first name or initials.}
+#'   \item{\code{author_gender}}{character Author's gender coded as male, female, or unkown.}
+#'   \item{\code{author_last_name}}{character Author's last name. }
+#'}
+#' @source \url{http://somewhere.important.com/}
+"authorship"
+
 

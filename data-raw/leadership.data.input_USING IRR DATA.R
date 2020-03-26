@@ -532,6 +532,12 @@ d2$cs_ID<-seq.int(20001,21212)
 # Rename data frame
 leader_text2 <- d2
 
+
+# Import author and authorship data ---------------------------------------
+
+authorship <- read_excel("data-raw/authorship.xlsx")
+
+
 # Recode variables --------------------------------------------------------
 
 # Add sex
@@ -568,6 +574,7 @@ leader_text2$group.structure2 <- group_str[leader_text2$group.structure2]
 # Convert factors to chars ------------------------------------------------
 
 documents <- mutate_if(documents, is.factor, as.character)
+authorship <- mutate_if(authorship, is.factor, as.character)
 leader_text <- mutate_if(leader_text, is.factor, as.character)
 leader_cult <- mutate_if(leader_cult, is.factor, as.character)
 leader_text_original <- mutate_if(leader_text_original, is.factor, as.character)
@@ -576,5 +583,5 @@ leader_text2 <- mutate_if(leader_text2, is.factor, as.character)
 
 # Write data --------------------------------------------------------------
 
-use_data(documents,leader_text,leader_cult,leader_text_original,text_records,leader_text2,overwrite=TRUE)
+use_data(documents, authorship, leader_text,leader_cult,leader_text_original,text_records,leader_text2,overwrite=TRUE)
 
