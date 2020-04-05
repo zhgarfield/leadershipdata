@@ -581,6 +581,16 @@ leader_text_original <- mutate_if(leader_text_original, is.factor, as.character)
 text_records <- mutate_if(text_records, is.factor, as.character)
 leader_text2 <- mutate_if(leader_text2, is.factor, as.character)
 
+
+# Female coauthor ---------------------------------------------------------
+
+female_coauthor <- function(document_ID){
+  author_genders <- authorship$author_gender[authorship$document_ID == document_ID]
+  'female' %in% author_genders
+}
+
+documents$female_coauthor <- map_lgl(documents$d_ID, female_coauthor)
+
 # Write data --------------------------------------------------------------
 
 use_data(documents, authorship, leader_text,leader_cult,leader_text_original,text_records,leader_text2,overwrite=TRUE)
