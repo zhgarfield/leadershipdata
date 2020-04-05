@@ -515,11 +515,24 @@ text_records <- d_raw.text
 
 # Import documents data frame ---------------------------------------------
 
-documents <- read_excel("data-raw/documents.xlsx")
-tmp <-
-  names(documents) %>%
-  str_replace("document::", "")
-names(documents) <- tmp
+
+documents <-
+  read_excel("data-raw/documents.xlsx") %>%
+  rename(
+    d_publication_date = `d_publication date`
+  ) %>%
+  mutate(
+    d_field_date_start = as.numeric(d_field_date_start),
+    d_field_date_end = as.numeric(d_field_date_end),
+    d_publication_date = as.numeric(d_publication_date),
+    # One missing pub date. Replace with d_field_date_end + 5 yrs
+    d_publication_date = case_when(
+      is.na(d_publication_date) ~ d_field_date_end + 5,
+      TRUE ~ d_publication_date
+    )
+  ) %>%
+  dplyr::select(d_ID, d_title, d_publication_date, everything())
+
 
 # Text record coding related to leadership costs, benefits, qualit --------
 # qualities, functions, and group structure
