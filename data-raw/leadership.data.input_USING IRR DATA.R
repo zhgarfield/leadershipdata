@@ -1,6 +1,9 @@
 ## Import all data into data frames and recode as necessary
 
 library(tidyverse)
+library(tidytext)
+library(textstem)
+library(hunspell)
 library(car)
 library(reshape2)
 library(stats)
@@ -512,9 +515,41 @@ leader_text<-dplyr::select(d_final,
 
 text_records <- d_raw.text
 
+# Words data frame for text analysis -------------------------------
+
+words <- text_records %>%
+  dplyr::select(cs_textrec_ID, raw_text) %>%
+  unnest_tokens(word, raw_text) %>%
+  mutate(
+    word = str_to_lower(word),
+    word = str_replace(word, "'s", "")
+    ) %>%
+  dplyr::filter(!str_detect(word, "\\d+")) %>%
+  dplyr::filter(!str_detect(word, 'page')) %>%
+  anti_join(stop_words) %>%
+  dplyr::filter(str_count(word) > 2 | word == 'ox') %>%
+  mutate(lemma = lemmatize_words(word))
+
+# document-term matrix
+dtm <-
+  words %>%
+  dplyr::select(cs_textrec_ID, lemma) %>%
+  group_by(cs_textrec_ID, lemma) %>%
+  summarise(count = n()) %>%
+  spread(lemma, count, fill = 0)
+
+# Two letter words that were removed (and their frequency). Kept "ox"
+#
+# ac ax er fo fr fu ga ha hò ix la lb mm mo na ne nw oi ot pe ph pt qa ra sa sp
+# 1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1
+# ta tb ti ué uj ur wi xv ba ea es gu im ko ma ms mu nä ol pa se sh uu xi du ed
+# 1  1  1  1  1  1  1  1  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  3  3
+# iv ki ku oa pl si st vi ya ad bu ge li po en op ri wa al ch dr el ho uh ii
+# 3  3  3  3  3  3  3  3  3  4  4  4  4  4  5  5  5  5  6  6  7  7  9  9  13
+# ka de pp cf
+# 13 14 20 22
 
 # Import documents data frame ---------------------------------------------
-
 
 documents <-
   read_excel("data-raw/documents.xlsx") %>%
@@ -606,5 +641,5 @@ documents$female_coauthor <- map_lgl(documents$d_ID, female_coauthor)
 
 # Write data --------------------------------------------------------------
 
-use_data(documents, authorship, leader_text,leader_cult,leader_text_original,text_records,leader_text2,overwrite=TRUE)
+use_data(documents, authorship, leader_text, leader_cult, leader_text_original, text_records, words, dtm, leader_text2, overwrite=TRUE)
 
