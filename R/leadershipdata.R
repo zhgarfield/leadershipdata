@@ -249,42 +249,42 @@
 #'   \item{\code{qualities_generous}}{double The leader displays or has a reputation for generosity.}
 #'   \item{\code{qualities_high.status}}{double The leader is described as having high social status, prestige, or held in high esteem.}
 #'   \item{\code{qualities_wealthy}}{double The leader is wealthier than followers including cash, material or other economic wealth measures.}
-#'   \item{\code{qualities.age}}{double The leader is an elder or is older than most followers.}
-#'   \item{\code{qualities.aggressive}}{double The leader demonstrates use of physical or verbal aggression or has a high propensity/reputation for aggressiveness.}
-#'   \item{\code{qualities.ambition}}{double The leader is described as ambitious, determined, enthusiastic, or highly motivated.}
-#'   \item{\code{qualities.attractive}}{double The leader is described/perceived as being physically/sexually attractive.}
-#'   \item{\code{qualities.bravery}}{double The leader is known for being courageous, brave, or fearless.}
-#'   \item{\code{qualities.charisma}}{double The leader is described as charismatic, able to motivate followers with their personality.}
-#'   \item{\code{qualities.coercive.authority}}{double The leader has strong authority over followers and social norms either promote or accept this authority; or, followers are unable to resist or depose the authority of the leader.}
-#'   \item{\code{qualities.confident}}{double The leader is confident, assured, or assertive.}
-#'   \item{\code{qualities.culturally.conservative}}{double The leader values tradition over new/outside ideas.}
-#'   \item{\code{qualities.culturally.progressive}}{double The leader is open to new/outside ideas and might value these ideas over tradition.}
-#'   \item{\code{qualities.decisive}}{double The leader makes decisions swiftly or has a reputation for good decision-making abilities.}
-#'   \item{\code{qualities.fairness}}{double The leader demonstrates fairness to all group members or has a reputation for fairness.}
-#'   \item{\code{qualities.favorable.personality}}{double The leader is described as having an ideal personality for the required context.}
-#'   \item{\code{qualities.feared}}{double The leader is feared by others or has a reputation for being feared.}
-#'   \item{\code{qualities.high.quality.spouse}}{double The leader is married to a high status or high quality spouse(s).}
-#'   \item{\code{qualities.honest}}{double The leader has a reputation for honesty.}
-#'   \item{\code{qualities.humble}}{double The leader is modest in estimating or signaling their own abilities or qualities; has a reputation for being humble.}
-#'   \item{\code{qualities.industriousness}}{double The leader is hardworking and productive.}
-#'   \item{\code{qualities.ingroup.member}}{double The leader is a member of the local group in residence and ethnicity with such membership explicitly mentioned as preferable or important.}
-#'   \item{\code{qualities.innovative}}{double The leader is described as being innovative or developing novel solutions/proposals.}
-#'   \item{\code{qualities.interpersonal.skills}}{double The leader works well with people and can effectively manages social relationships.}
-#'   \item{\code{qualities.killer}}{double The leader has killed someone.}
-#'   \item{\code{qualities.knowlageable.intellect}}{double The leader is known for superior intelligence, knowledge, cognitive functioning, specialized education, wisdom, or esoteric knowledge.}
-#'   \item{\code{qualities.loyalty}}{double The leader demonstrates loyalty to the in- group or important members of the in-group.}
-#'   \item{\code{qualities.many.children}}{double The leader has many offspring.}
-#'   \item{\code{qualities.oratory.skill}}{double The leader is a good public speaker, eloquent, demonstrates high oratory skill, or forceful/persuasive speaking abilities.}
-#'   \item{\code{qualities.physical.health}}{double The leader is physically healthy.}
-#'   \item{\code{qualities.physically.strong}}{double The leader is physically strong, large in size, or physically formidable.}
-#'   \item{\code{qualities.polygynous}}{double The leader is married polygynous or has multiple current mates/sexual partners.}
-#'   \item{\code{qualities.proper.behavior}}{double The leader demonstrates proper behavior for specific contexts or that is particularly valued.}
-#'   \item{\code{qualities.prosocial}}{double The leader is concerned with group welfare or has a reputation for group-wide altruism and selflessness.}
-#'   \item{\code{qualities.social.contacts}}{double The leader has a high number of social contacts or allies.}
-#'   \item{\code{qualities.strategic.nepotism}}{double The leader or the leadership system strategically provides benefits to kin/family members. Social influence/leadership is partially determined or mediated via kinship or inheritance.}
-#'   \item{\code{qualities.strategic.planner}}{double The leader makes decisions/plans for the future relying on their knowledge and intellect in order to optimize outcomes for the group; considers outcomes strategically.}
-#'   \item{\code{qualities.supernatural}}{double The leader is perceived to possess supernatural qualities/abilities.}
-#'   \item{\code{qualities.xenophobic}}{double The leader is described as fearing and mistrusting outsiders.}
+#'   \item{\code{qualities_age}}{double The leader is an elder or is older than most followers.}
+#'   \item{\code{qualities_aggressive}}{double The leader demonstrates use of physical or verbal aggression or has a high propensity/reputation for aggressiveness.}
+#'   \item{\code{qualities_ambition}}{double The leader is described as ambitious, determined, enthusiastic, or highly motivated.}
+#'   \item{\code{qualities_attractive}}{double The leader is described/perceived as being physically/sexually attractive.}
+#'   \item{\code{qualities_bravery}}{double The leader is known for being courageous, brave, or fearless.}
+#'   \item{\code{qualities_charisma}}{double The leader is described as charismatic, able to motivate followers with their personality.}
+#'   \item{\code{qualities_coercive.authority}}{double The leader has strong authority over followers and social norms either promote or accept this authority; or, followers are unable to resist or depose the authority of the leader.}
+#'   \item{\code{qualities_confident}}{double The leader is confident, assured, or assertive.}
+#'   \item{\code{qualities_culturally.conservative}}{double The leader values tradition over new/outside ideas.}
+#'   \item{\code{qualities_culturally.progressive}}{double The leader is open to new/outside ideas and might value these ideas over tradition.}
+#'   \item{\code{qualities_decisive}}{double The leader makes decisions swiftly or has a reputation for good decision-making abilities.}
+#'   \item{\code{qualities_fairness}}{double The leader demonstrates fairness to all group members or has a reputation for fairness.}
+#'   \item{\code{qualities_favorable.personality}}{double The leader is described as having an ideal personality for the required context.}
+#'   \item{\code{qualities_feared}}{double The leader is feared by others or has a reputation for being feared.}
+#'   \item{\code{qualities_high.quality.spouse}}{double The leader is married to a high status or high quality spouse(s).}
+#'   \item{\code{qualities_honest}}{double The leader has a reputation for honesty.}
+#'   \item{\code{qualities_humble}}{double The leader is modest in estimating or signaling their own abilities or qualities; has a reputation for being humble.}
+#'   \item{\code{qualities_industriousness}}{double The leader is hardworking and productive.}
+#'   \item{\code{qualities_ingroup.member}}{double The leader is a member of the local group in residence and ethnicity with such membership explicitly mentioned as preferable or important.}
+#'   \item{\code{qualities_innovative}}{double The leader is described as being innovative or developing novel solutions/proposals.}
+#'   \item{\code{qualities_interpersonal.skills}}{double The leader works well with people and can effectively manages social relationships.}
+#'   \item{\code{qualities_killer}}{double The leader has killed someone.}
+#'   \item{\code{qualities_knowlageable.intellect}}{double The leader is known for superior intelligence, knowledge, cognitive functioning, specialized education, wisdom, or esoteric knowledge.}
+#'   \item{\code{qualities_loyalty}}{double The leader demonstrates loyalty to the in- group or important members of the in-group.}
+#'   \item{\code{qualities_many.children}}{double The leader has many offspring.}
+#'   \item{\code{qualities_oratory.skill}}{double The leader is a good public speaker, eloquent, demonstrates high oratory skill, or forceful/persuasive speaking abilities.}
+#'   \item{\code{qualities_physical.health}}{double The leader is physically healthy.}
+#'   \item{\code{qualities_physically.strong}}{double The leader is physically strong, large in size, or physically formidable.}
+#'   \item{\code{qualities_polygynous}}{double The leader is married polygynous or has multiple current mates/sexual partners.}
+#'   \item{\code{qualities_proper.behavior}}{double The leader demonstrates proper behavior for specific contexts or that is particularly valued.}
+#'   \item{\code{qualities_prosocial}}{double The leader is concerned with group welfare or has a reputation for group-wide altruism and selflessness.}
+#'   \item{\code{qualities_social.contacts}}{double The leader has a high number of social contacts or allies.}
+#'   \item{\code{qualities_strategic.nepotism}}{double The leader or the leadership system strategically provides benefits to kin/family members. Social influence/leadership is partially determined or mediated via kinship or inheritance.}
+#'   \item{\code{qualities_strategic.planner}}{double The leader makes decisions/plans for the future relying on their knowledge and intellect in order to optimize outcomes for the group; considers outcomes strategically.}
+#'   \item{\code{qualities_supernatural}}{double The leader is perceived to possess supernatural qualities/abilities.}
+#'   \item{\code{qualities_xenophobic}}{double The leader is described as fearing and mistrusting outsiders.}
 #'   \item{\code{demo_sex}}{character Sex of the leader described coded as male, female, or both.}
 #'   \item{\code{group.structure2}}{character Recoded group structures as follows: economic group, kin group, military group, political group (community), political group (supracommunity), religious group, residential subgroup}
 #'}
