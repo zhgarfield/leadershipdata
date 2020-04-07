@@ -36,7 +36,8 @@ sccs.vars=c('SOCNAME','V61','V63', 'V64', 'V69','V70', 'V73', 'V76', 'V77',  'V7
             'V768', 'V769', 'V770', 'V773', 'V774', 'V775', 'V777', 'V778', 'V780', 'V785', 'V793', 'V794',
             'V795', 'V796', 'V835', 'V836', 'V860', 'V866', 'V867', 'V868', 'V869', 'V902', 'V903', 'V905',
             'V907', 'V910', 'V1133', 'V1134', 'V1648', 'V1683', 'V1684', 'V1685')
-sccs.2=sccs[sccs.nums,sccs.vars]
+
+sccs.2 <- sccs[sccs.nums,sccs.vars]
 Culture.codes <- read.delim("data-raw/Culture codes.txt")
 
 Culture.codes$SCCS = as.character(Culture.codes$SCCS)
@@ -503,6 +504,28 @@ leader_cult <- cultures %>%
   dplyr::select(c_culture_code, Name, Region) %>%
   left_join(d.ctPKG, by = 'c_culture_code')
 
+# Recode cultural char vars as ordinal
+
+leader_cult$com_size <-
+  ordered(
+    leader_cult$com_size,
+    levels = c("< 99", "100-199", "200-399", "400-999", "> 1,000")
+  )
+
+leader_cult$pop_density <-
+  ordered(
+    leader_cult$pop_density,
+    levels = c(
+      "1 or less person / 1-5 sq. mile",
+      "1-5 persons / sq. mile",
+      "1-25 persons / sq. mile",
+      "26-100 persons / sq. mile",
+      "101-500 persons / sq. mile",
+      "over 500 persons / sq. mile"
+    )
+  )
+
+# Create leader_text
 
 leader_text<-dplyr::select(d_final,
                            cs_ID:evidence_hooper_against,
@@ -572,13 +595,39 @@ documents <-
 # Text record coding related to leadership costs, benefits, qualit --------
 # qualities, functions, and group structure
 
-d2 <- read_csv("data-raw/reconciled_coding2.csv")
+leader_text2 <- read_csv("data-raw/reconciled_coding2.csv")
 
-#Reset code sheet IDs for d2 (leader_text2) to avoid any confusion with leader_text coding.
-d2$cs_ID<-seq.int(20001,21212)
+# Reset code sheet IDs for d2 (leader_text2) to avoid any confusion with leader_text coding.
+leader_text2$cs_ID<-seq.int(20001,21212)
 
-# Rename data frame
-leader_text2 <- d2
+# Recode -1's
+
+negs <- map_dbl(leader_text2[c(3:25, 27:48, 50:109)], ~ sum(.x < 0))
+pos <-  map_dbl(leader_text2[c(3:25, 27:48, 50:109)], ~ sum(.x > 0)) # 26 is functions_context: char
+
+# if ratio of negs to pos is > 0.1, create new anti var
+
+leader_text2$qualities_antihonest <-
+  ifelse(leader_text2$qualities_honest == -1, 1, 0)
+
+leader_text2$qualities_antifairness <-
+  ifelse(leader_text2$qualities_fairness == -1, 1, 0)
+
+leader_text2$qualities_antidrug.consumption <-
+  ifelse(leader_text2$qualities_drug.consumption == -1, 1, 0)
+
+leader_text2$qualities_anticoercive.authority <-
+  ifelse(leader_text2$qualities_coercive.authority == -1, 1, 0)
+
+leader_text2_original <- leader_text2
+
+leader_text2 <-
+  map_if(leader_text2_original, is.numeric, ~ ifelse(.x < 0, 0, .x)) %>%
+  as_tibble
+
+# Compare to negs, pos
+negs2 <- map_dbl(leader_text2[c(3:25, 27:48, 50:109)], ~ sum(.x < 0))
+pos2 <-  map_dbl(leader_text2[c(3:25, 27:48, 50:109)], ~ sum(.x > 0))
 
 
 # Import author and authorship data ---------------------------------------
@@ -640,5 +689,5 @@ leader_text2 <- mutate_if(leader_text2, is.factor, as.character)
 
 # Write data --------------------------------------------------------------
 
-use_data(documents, authorship, leader_text, leader_text2, leader_cult, leader_text_original, text_records, leader_words, leader_dtm, overwrite=TRUE)
+use_data(documents, authorship, leader_text, leader_text2_original, leader_text2, leader_cult, leader_text_original, text_records, leader_words, leader_dtm, overwrite=TRUE)
 
