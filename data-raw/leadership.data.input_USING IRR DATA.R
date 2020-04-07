@@ -517,7 +517,7 @@ text_records <- d_raw.text
 
 # Words data frame for text analysis -------------------------------
 
-words <- text_records %>%
+leader_words <- text_records %>%
   dplyr::select(cs_textrec_ID, raw_text) %>%
   unnest_tokens(word, raw_text) %>%
   mutate(
@@ -531,8 +531,8 @@ words <- text_records %>%
   mutate(lemma = lemmatize_words(word))
 
 # document-term matrix
-dtm <-
-  words %>%
+leader_dtm <-
+  leader_words %>%
   dplyr::select(cs_textrec_ID, lemma) %>%
   group_by(cs_textrec_ID, lemma) %>%
   summarise(count = n()) %>%
@@ -640,9 +640,6 @@ female_coauthor <- function(document_ID){
 documents$female_coauthor <- map_lgl(documents$d_ID, female_coauthor)
 
 # Write data --------------------------------------------------------------
-
-leader_words <- words
-leader_dtm <- dtm
 
 use_data(documents, authorship, leader_text, leader_cult, leader_text_original, text_records, leader_words, leader_dtm, leader_text2, overwrite=TRUE)
 
