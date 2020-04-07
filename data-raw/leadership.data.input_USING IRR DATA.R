@@ -1,6 +1,9 @@
 ## Import all data into data frames and recode as necessary
 
 library(tidyverse)
+library(tidytext)
+library(textstem)
+library(hunspell)
 library(car)
 library(reshape2)
 library(stats)
@@ -33,7 +36,8 @@ sccs.vars=c('SOCNAME','V61','V63', 'V64', 'V69','V70', 'V73', 'V76', 'V77',  'V7
             'V768', 'V769', 'V770', 'V773', 'V774', 'V775', 'V777', 'V778', 'V780', 'V785', 'V793', 'V794',
             'V795', 'V796', 'V835', 'V836', 'V860', 'V866', 'V867', 'V868', 'V869', 'V902', 'V903', 'V905',
             'V907', 'V910', 'V1133', 'V1134', 'V1648', 'V1683', 'V1684', 'V1685')
-sccs.2=sccs[sccs.nums,sccs.vars]
+
+sccs.2 <- sccs[sccs.nums,sccs.vars]
 Culture.codes <- read.delim("data-raw/Culture codes.txt")
 
 Culture.codes$SCCS = as.character(Culture.codes$SCCS)
@@ -500,6 +504,28 @@ leader_cult <- cultures %>%
   dplyr::select(c_culture_code, Name, Region) %>%
   left_join(d.ctPKG, by = 'c_culture_code')
 
+# Recode cultural char vars as ordinal
+
+leader_cult$com_size <-
+  ordered(
+    leader_cult$com_size,
+    levels = c("< 99", "100-199", "200-399", "400-999", "> 1,000")
+  )
+
+leader_cult$pop_density <-
+  ordered(
+    leader_cult$pop_density,
+    levels = c(
+      "1 or less person / 1-5 sq. mile",
+      "1-5 persons / sq. mile",
+      "1-25 persons / sq. mile",
+      "26-100 persons / sq. mile",
+      "101-500 persons / sq. mile",
+      "over 500 persons / sq. mile"
+    )
+  )
+
+# Create leader_text
 
 leader_text<-dplyr::select(d_final,
                            cs_ID:evidence_hooper_against,
@@ -512,25 +538,96 @@ leader_text<-dplyr::select(d_final,
 
 text_records <- d_raw.text
 
+# Words data frame for text analysis -------------------------------
+
+leader_words <- text_records %>%
+  dplyr::select(cs_textrec_ID, raw_text) %>%
+  unnest_tokens(word, raw_text) %>%
+  mutate(
+    word = str_to_lower(word),
+    word = str_replace(word, "'s", "")
+    ) %>%
+  dplyr::filter(!str_detect(word, "\\d+")) %>%
+  dplyr::filter(!str_detect(word, 'page')) %>%
+  anti_join(stop_words) %>%
+  dplyr::filter(str_count(word) > 2 | word == 'ox') %>%
+  mutate(lemma = lemmatize_words(word))
+
+# document-term matrix
+leader_dtm <-
+  leader_words %>%
+  dplyr::select(cs_textrec_ID, lemma) %>%
+  group_by(cs_textrec_ID, lemma) %>%
+  summarise(count = n()) %>%
+  spread(lemma, count, fill = 0)
+
+# Two letter words that were removed (and their frequency). Kept "ox"
+#
+# ac ax er fo fr fu ga ha hò ix la lb mm mo na ne nw oi ot pe ph pt qa ra sa sp
+# 1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1
+# ta tb ti ué uj ur wi xv ba ea es gu im ko ma ms mu nä ol pa se sh uu xi du ed
+# 1  1  1  1  1  1  1  1  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  2  3  3
+# iv ki ku oa pl si st vi ya ad bu ge li po en op ri wa al ch dr el ho uh ii
+# 3  3  3  3  3  3  3  3  3  4  4  4  4  4  5  5  5  5  6  6  7  7  9  9  13
+# ka de pp cf
+# 13 14 20 22
 
 # Import documents data frame ---------------------------------------------
 
-documents <- read_excel("data-raw/documents.xlsx")
-tmp <-
-  names(documents) %>%
-  str_replace("document::", "")
-names(documents) <- tmp
+documents <-
+  read_excel("data-raw/documents.xlsx") %>%
+  rename(
+    d_publication_date = `d_publication date`
+  ) %>%
+  mutate(
+    d_field_date_start = as.numeric(d_field_date_start),
+    d_field_date_end = as.numeric(d_field_date_end),
+    d_publication_date = as.numeric(d_publication_date),
+    # One missing pub date. Replace with d_field_date_end + 5 yrs
+    d_publication_date = case_when(
+      is.na(d_publication_date) ~ d_field_date_end + 5,
+      TRUE ~ d_publication_date
+    )
+  ) %>%
+  dplyr::select(d_ID, d_title, d_publication_date, everything())
+
 
 # Text record coding related to leadership costs, benefits, qualit --------
 # qualities, functions, and group structure
 
-d2 <- read_csv("data-raw/reconciled_coding2.csv")
+leader_text2 <- read_csv("data-raw/reconciled_coding2.csv")
 
-#Reset code sheet IDs for d2 (leader_text2) to avoid any confusion with leader_text coding.
-d2$cs_ID<-seq.int(20001,21212)
+# Reset code sheet IDs for d2 (leader_text2) to avoid any confusion with leader_text coding.
+leader_text2$cs_ID<-seq.int(20001,21212)
 
-# Rename data frame
-leader_text2 <- d2
+# Recode -1's
+
+negs <- map_dbl(leader_text2[c(3:25, 27:48, 50:109)], ~ sum(.x < 0))
+pos <-  map_dbl(leader_text2[c(3:25, 27:48, 50:109)], ~ sum(.x > 0)) # 26 is functions_context: char
+
+# if ratio of negs to pos is > 0.1, create new anti var
+
+leader_text2$qualities_antihonest <-
+  ifelse(leader_text2$qualities_honest == -1, 1, 0)
+
+leader_text2$qualities_antifairness <-
+  ifelse(leader_text2$qualities_fairness == -1, 1, 0)
+
+leader_text2$qualities_antidrug.consumption <-
+  ifelse(leader_text2$qualities_drug.consumption == -1, 1, 0)
+
+leader_text2$qualities_anticoercive.authority <-
+  ifelse(leader_text2$qualities_coercive.authority == -1, 1, 0)
+
+leader_text2_original <- leader_text2
+
+leader_text2 <-
+  map_if(leader_text2_original, is.numeric, ~ ifelse(.x < 0, 0, .x)) %>%
+  as_tibble
+
+# Compare to negs, pos
+negs2 <- map_dbl(leader_text2[c(3:25, 27:48, 50:109)], ~ sum(.x < 0))
+pos2 <-  map_dbl(leader_text2[c(3:25, 27:48, 50:109)], ~ sum(.x > 0))
 
 
 # Import author and authorship data ---------------------------------------
@@ -571,6 +668,15 @@ group_str <- c(
 leader_text2$group.structure2 <- leader_text2$group.structure.coded
 leader_text2$group.structure2 <- group_str[leader_text2$group.structure2]
 
+# Female coauthor ---------------------------------------------------------
+
+female_coauthor <- function(document_ID){
+  author_genders <- authorship$author_gender[authorship$document_ID == document_ID]
+  'female' %in% author_genders
+}
+
+documents$female_coauthor <- map_lgl(documents$d_ID, female_coauthor)
+
 # Convert factors to chars ------------------------------------------------
 
 documents <- mutate_if(documents, is.factor, as.character)
@@ -583,5 +689,5 @@ leader_text2 <- mutate_if(leader_text2, is.factor, as.character)
 
 # Write data --------------------------------------------------------------
 
-use_data(documents, authorship, leader_text,leader_cult,leader_text_original,text_records,leader_text2,overwrite=TRUE)
+use_data(documents, authorship, leader_text, leader_text2_original, leader_text2, leader_cult, leader_text_original, text_records, leader_words, leader_dtm, overwrite=TRUE)
 
