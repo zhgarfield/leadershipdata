@@ -640,5 +640,5 @@ leader_text2 <- mutate_if(leader_text2, is.factor, as.character)
 
 # Write data --------------------------------------------------------------
 
-use_data(documents, authorship, leader_text, leader_cult, leader_text_original, text_records, leader_words, leader_dtm, leader_text2, overwrite=TRUE)
+use_data(documents, authorship, leader_text, leader_text2, leader_cult, leader_text_original, text_records, leader_words, leader_dtm, overwrite=TRUE)
 
