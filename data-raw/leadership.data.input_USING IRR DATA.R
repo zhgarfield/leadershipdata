@@ -619,6 +619,15 @@ group_str <- c(
 leader_text2$group.structure2 <- leader_text2$group.structure.coded
 leader_text2$group.structure2 <- group_str[leader_text2$group.structure2]
 
+# Female coauthor ---------------------------------------------------------
+
+female_coauthor <- function(document_ID){
+  author_genders <- authorship$author_gender[authorship$document_ID == document_ID]
+  'female' %in% author_genders
+}
+
+documents$female_coauthor <- map_lgl(documents$d_ID, female_coauthor)
+
 # Convert factors to chars ------------------------------------------------
 
 documents <- mutate_if(documents, is.factor, as.character)
@@ -628,16 +637,6 @@ leader_cult <- mutate_if(leader_cult, is.factor, as.character)
 leader_text_original <- mutate_if(leader_text_original, is.factor, as.character)
 text_records <- mutate_if(text_records, is.factor, as.character)
 leader_text2 <- mutate_if(leader_text2, is.factor, as.character)
-
-
-# Female coauthor ---------------------------------------------------------
-
-female_coauthor <- function(document_ID){
-  author_genders <- authorship$author_gender[authorship$document_ID == document_ID]
-  'female' %in% author_genders
-}
-
-documents$female_coauthor <- map_lgl(documents$d_ID, female_coauthor)
 
 # Write data --------------------------------------------------------------
 
