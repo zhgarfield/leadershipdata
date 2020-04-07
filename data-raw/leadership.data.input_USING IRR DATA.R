@@ -641,5 +641,8 @@ documents$female_coauthor <- map_lgl(documents$d_ID, female_coauthor)
 
 # Write data --------------------------------------------------------------
 
-use_data(documents, authorship, leader_text, leader_cult, leader_text_original, text_records, words, dtm, leader_text2, overwrite=TRUE)
+leader_words <- words
+leader_dtm <- dtm
+
+use_data(documents, authorship, leader_text, leader_cult, leader_text_original, text_records, leader_words, leader_dtm, leader_text2, overwrite=TRUE)
 
