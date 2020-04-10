@@ -564,7 +564,8 @@ leader_dtm <-
   dplyr::select(cs_textrec_ID, lemma) %>%
   group_by(cs_textrec_ID, lemma) %>%
   summarise(count = n()) %>%
-  spread(lemma, count, fill = 0)
+  spread(lemma, count, fill = 0) %>%
+  ungroup
 
 # Two letter words that were removed (and their frequency). Kept "ox"
 #
