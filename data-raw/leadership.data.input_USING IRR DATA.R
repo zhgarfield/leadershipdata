@@ -428,7 +428,7 @@ present = function(x) {(sum(x) > 0)*1}
 d.ct <- d %>%
   dplyr::select(c_name, one_of(all_vars)) %>%
   group_by(c_name) %>%
-  summarise_all(funs(present,mean)) %>%
+  summarise_all(lst(present, mean)) %>%
   right_join(d.ct, by='c_name')
 
 # Compute models scores by culture
@@ -540,8 +540,13 @@ text_records <- d_raw.text
 
 # Words data frame for text analysis -------------------------------
 
-leader_words <- text_records %>%
+leader_words <-
+  text_records %>%
   dplyr::select(cs_textrec_ID, raw_text) %>%
+  mutate(
+    raw_text = iconv(raw_text, "", "UTF-8"),
+    raw_text = str_replace(raw_text, "’", "'") # Switch ’ to '
+  ) %>%
   unnest_tokens(word, raw_text) %>%
   mutate(
     word = str_to_lower(word),
