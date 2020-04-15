@@ -428,7 +428,7 @@ present = function(x) {(sum(x) > 0)*1}
 d.ct <- d %>%
   dplyr::select(c_name, one_of(all_vars)) %>%
   group_by(c_name) %>%
-  summarise_all(funs(present,mean)) %>%
+  summarise_all(lst(present, mean)) %>%
   right_join(d.ct, by='c_name')
 
 # Compute models scores by culture
@@ -540,8 +540,13 @@ text_records <- d_raw.text
 
 # Words data frame for text analysis -------------------------------
 
-leader_words <- text_records %>%
+leader_words <-
+  text_records %>%
   dplyr::select(cs_textrec_ID, raw_text) %>%
+  mutate(
+    raw_text = iconv(raw_text, "", "UTF-8"),
+    raw_text = str_replace(raw_text, "’", "'") # Switch ’ to '
+  ) %>%
   unnest_tokens(word, raw_text) %>%
   mutate(
     word = str_to_lower(word),
@@ -602,10 +607,21 @@ leader_text2$cs_ID<-seq.int(20001,21212)
 
 # Recode -1's
 
-negs <- map_dbl(leader_text2[c(3:25, 27:48, 50:109)], ~ sum(.x < 0))
-pos <-  map_dbl(leader_text2[c(3:25, 27:48, 50:109)], ~ sum(.x > 0)) # 26 is functions_context: char
+# First, figure out which vars have -1's, and how many
+negs <-
+  leader_text2[-c(1:3)] %>%
+  select_if(is.numeric) %>%
+  map_dbl(~sum(.x < 0))
 
-# if ratio of negs to pos is > 0.1, create new anti var
+# An how many +1's
+pos <-
+  leader_text2[-c(1:3)] %>%
+  select_if(is.numeric) %>%
+  map_dbl(~sum(.x > 0))
+
+# if ratio of negs to pos is > 0.1 create new anti vars
+ratio <- negs/pos
+ratio[ratio>0.1]
 
 leader_text2$qualities_antihonest <-
   ifelse(leader_text2$qualities_honest == -1, 1, 0)
@@ -626,9 +642,15 @@ leader_text2 <-
   as_tibble
 
 # Compare to negs, pos
-negs2 <- map_dbl(leader_text2[c(3:25, 27:48, 50:109)], ~ sum(.x < 0))
-pos2 <-  map_dbl(leader_text2[c(3:25, 27:48, 50:109)], ~ sum(.x > 0))
+negs2 <-
+  leader_text2[-c(1:3)] %>%
+  select_if(is.numeric) %>%
+  map_dbl(~sum(.x < 0))
 
+pos2 <-
+  leader_text2[-c(1:3)] %>%
+  select_if(is.numeric) %>%
+  map_dbl(~sum(.x > 0))
 
 # Import author and authorship data ---------------------------------------
 
