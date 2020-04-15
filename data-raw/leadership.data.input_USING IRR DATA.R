@@ -625,16 +625,16 @@ ratio <- negs/pos
 ratio[ratio>0.1]
 
 leader_text2$qualities_antihonest <-
-  ifelse(leader_text2$qualities_honest == -1, 1, 0)
+  ifelse(leader_text2$qualities_Honest == -1, 1, 0)
 
 leader_text2$qualities_antifairness <-
-  ifelse(leader_text2$qualities_fairness == -1, 1, 0)
+  ifelse(leader_text2$qualities_Fairness == -1, 1, 0)
 
 leader_text2$qualities_antidrug.consumption <-
-  ifelse(leader_text2$qualities_drug.consumption == -1, 1, 0)
+  ifelse(leader_text2$qualities_DrugConsumption == -1, 1, 0)
 
 leader_text2$qualities_anticoercive.authority <-
-  ifelse(leader_text2$qualities_coercive.authority == -1, 1, 0)
+  ifelse(leader_text2$qualities_CoerciveAuthority == -1, 1, 0)
 
 leader_text2_original <- leader_text2
 
@@ -688,7 +688,7 @@ group_str <- c(
   "unkown" = "other"
 )
 
-leader_text2$group.structure2 <- leader_text2$group.structure.coded
+leader_text2$group.structure2 <- leader_text2$group.structure_Coded
 leader_text2$group.structure2 <- group_str[leader_text2$group.structure2]
 
 # Female coauthor ---------------------------------------------------------
