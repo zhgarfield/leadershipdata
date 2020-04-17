@@ -624,16 +624,16 @@ pos <-
 ratio <- negs/pos
 ratio[ratio>0.1]
 
-leader_text2$qualities_antihonest <-
+leader_text2$qualities_AntiHonest <-
   ifelse(leader_text2$qualities_Honest == -1, 1, 0)
 
-leader_text2$qualities_antifairness <-
+leader_text2$qualities_AntiFairness <-
   ifelse(leader_text2$qualities_Fairness == -1, 1, 0)
 
-leader_text2$qualities_antidrug.consumption <-
+leader_text2$qualities_AntiDrugConsumption <-
   ifelse(leader_text2$qualities_DrugConsumption == -1, 1, 0)
 
-leader_text2$qualities_anticoercive.authority <-
+leader_text2$qualities_AntiCoerciveAuthority <-
   ifelse(leader_text2$qualities_CoerciveAuthority == -1, 1, 0)
 
 leader_text2_original <- leader_text2
