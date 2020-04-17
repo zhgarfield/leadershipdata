@@ -11,6 +11,7 @@ library(devtools)
 library(roxygen2)
 library(readr)
 library(readxl)
+library(tidylog)
 
 ####IMPORTING DATA SETS
 
