@@ -18,8 +18,6 @@ library(readxl)
 d<-read.csv("data-raw/ehraf_leadership_TOTAL_FINAL_IRR.csv")
 d<-d[c(1:1212),]
 
-
-
 # Incorporating SCCS label, variables -------------------------------------
 
 load('data-raw/sccs.RData')
@@ -710,7 +708,86 @@ leader_text_original <- mutate_if(leader_text_original, is.factor, as.character)
 text_records <- mutate_if(text_records, is.factor, as.character)
 leader_text2 <- mutate_if(leader_text2, is.factor, as.character)
 
+
+# Nice var names ----------------------------------------------------------
+
+var_names <- c(
+  "function_BestowMate" = "Bestow mates",
+  "function_PoliticalAppointments" = "Political appointments",
+  "functions_ConstructionInfrastructure"       = "Construction/infastructure",
+  "functions_ControlEconomics"                 = "Control economics",
+  "functions_CouncilMember"                    = "Council member",
+  "functions_GroupDetermination"              = "Group determination/cohesiveness",
+  "functions_Hospitality"                       = "Hospitality",
+  "functions_MilitaryCommand"                  = "Military command",
+  "functions_NewSettlement"                    =  "Movement/migration",
+  "functions_ProsocialInvestment"              = "Prosocial investment",
+  "functions_ProvideCounsel"                   = "Provide counsel/direction",
+  "functions_Punishment"                        = "Punishment",
+  "functions_ServeLeader"                      = "Serve a leader",
+  "functions_StrategicPlanning" = "Strategic planning",
+  "function_OrganizeCooperation"  = "Organize cooperation",
+  "function_ResolveConflcit"      = "Resolve conflict",
+  "functions_ControlCalendar"     = "Control calendar",
+  "functions_ControlImmigration"  = "Control immigration",
+  "functions_DistributeResources" = "Distribute resources",
+  "functions_GroupRepresentative" = "Group representative",
+  "functions_Medicinal"           = "Medicinal functions",
+  "functions_MoralAuthority"     = "Moral authority",
+  "functions_Policymaking"        =  "Policy making",
+  "functions_Protection"          = "Protection",
+  "functions_ProvideSubsistence" = "Provide subsistence",
+  "functions_Ritual"              = "Ritual functions",
+  "functions_SocialFunctions" = "Misc. social functions",
+  "qualities_ArtisticPerformance"     = "Artistic performance",
+  "qualities_Generous"                 = "Generosity",
+  "qualities_Age"                      = "Age",
+  "qualities_Attractive"              = "Attractive",
+  "qualities_CoerciveAuthority"      = "Coercive authority",
+  "qualities_CulturallyProgressive"  = "Culturally progressive",
+  "qualities_FavorablePersonality"   = "Favorable personality",
+  "qualities_Honest"                  = "Honesty",
+  "qualities_IngroupMember"          = "Ingroup member",
+  "qualities_Killer"                  = "Killer",
+  "qualities_ManyChildren"           = "Many children",
+  "qualities_PhysicallyStrong"       = "Physically formidable",
+  "qualities_Prosocial"               = "Prosocial",
+  "qualities_StrategicPlanner"       = "Strategic planner",
+  "qualities_DrugConsumption"     = "Drug consumption",
+  "qualities_HighStatus"            = "High status",
+  "qualities_Aggressive"             = "Aggressiveness",
+  "qualities_Bravery"               = "Bravery",
+  "qualities_Confident"             = "Confidence",
+  "qualities_Decisive"              = "Decisiveness/decision-making",
+  "qualities_Feared"                = "Feared",
+  "qualities_Humble"                = "Humility",
+  "qualities_Innovative"            = "Innovative",
+  "qualities_KnowlageableIntellect" = "Knowledgeable/intelligent",
+  "qualities_OratorySkill"         = "Oratory skill",
+  "qualities_Polygynous"            = "Polygynous",
+  "qualities_SocialContacts"       = "Social contacts",
+  "qualities_Supernatural"    = "Supernatural",
+  "qualities_ExpAccomplished"       = "Experienced/accomplished",
+  "qualities_Wealthy"                = "Wealthy",
+  "qualities_Ambition"               = "Ambitious",
+  "qualities_Charisma"               = "Charisma",
+  "qualities_CulturallyConservative" = "Culturally conservative",
+  "qualities_Fairness"               = "Fairness",
+  "qualities_HighQualitySpouse"    = "High-quality spouse",
+  "qualities_Industriousness"        = "Industriousness",
+  "qualities_Interpersonal.skills"   = "Interpersonal skills",
+  "qualities_Loyalty"                = "Loyalty",
+  "qualities_PhysicalHealth"        = "Physical health",
+  "qualities_ProperBehavior"        = "Proper behavior",
+  "qualities_Strategic.Nepotism"     = "Strategic nepotism",
+  "qualities_Xenophobic"   = "Xenophobia",
+  "qualities_AntiHonest" = "Dishonest",
+  "qualities_AntiFairness" = "Unfair",
+  "qualities_AntiDrugConsumption" = "No drug consumption",
+  "qualities_AntiCoerciveAuthority" = "No coercive authority"
+)
+
 # Write data --------------------------------------------------------------
 
-use_data(documents, authorship, leader_text, leader_text2_original, leader_text2, leader_cult, leader_text_original, text_records, leader_words, leader_dtm, overwrite=TRUE)
+use_data(documents, authorship, leader_text, leader_text2_original, leader_text2, leader_cult, leader_text_original, text_records, leader_words, leader_dtm, var_names, overwrite=TRUE)
 
