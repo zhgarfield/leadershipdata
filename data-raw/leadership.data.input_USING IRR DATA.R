@@ -620,16 +620,16 @@ pos <-
 ratio <- negs/pos
 ratio[ratio>0.1]
 
-leader_text2$qualities_antihonest <-
+leader_text2$qualities_AntiHonest <-
   ifelse(leader_text2$qualities_Honest == -1, 1, 0)
 
-leader_text2$qualities_antifairness <-
+leader_text2$qualities_AntiFairness <-
   ifelse(leader_text2$qualities_Fairness == -1, 1, 0)
 
-leader_text2$qualities_antidrug.consumption <-
+leader_text2$qualities_AntiDrugConsumption <-
   ifelse(leader_text2$qualities_DrugConsumption == -1, 1, 0)
 
-leader_text2$qualities_anticoercive.authority <-
+leader_text2$qualities_AntiCoerciveAuthority <-
   ifelse(leader_text2$qualities_CoerciveAuthority == -1, 1, 0)
 
 leader_text2_original <- leader_text2
@@ -734,8 +734,8 @@ leader_text2 <- mutate_if(leader_text2, is.factor, as.character)
 # Nice var names ----------------------------------------------------------
 
 var_names <- c(
-  "function_BestowMate" = "Bestow mates",
-  "function_PoliticalAppointments" = "Political appointments",
+  "functions_BestowMate" = "Bestow mates",
+  "functions_PoliticalAppointments" = "Political appointments",
   "functions_ConstructionInfrastructure"       = "Construction/infastructure",
   "functions_ControlEconomics"                 = "Control economics",
   "functions_CouncilMember"                    = "Council member",
@@ -748,8 +748,8 @@ var_names <- c(
   "functions_Punishment"                        = "Punishment",
   "functions_ServeLeader"                      = "Serve a leader",
   "functions_StrategicPlanning" = "Strategic planning",
-  "function_OrganizeCooperation"  = "Organize cooperation",
-  "function_ResolveConflcit"      = "Resolve conflict",
+  "functions_OrganizeCooperation"  = "Organize cooperation",
+  "functions_ResolveConflcit"      = "Resolve conflict",
   "functions_ControlCalendar"     = "Control calendar",
   "functions_ControlImmigration"  = "Control immigration",
   "functions_DistributeResources" = "Distribute resources",
@@ -797,16 +797,53 @@ var_names <- c(
   "qualities_Fairness"               = "Fairness",
   "qualities_HighQualitySpouse"    = "High-quality spouse",
   "qualities_Industriousness"        = "Industriousness",
-  "qualities_Interpersonal.skills"   = "Interpersonal skills",
+  "qualities_InterpersonalSkills"   = "Interpersonal skills",
   "qualities_Loyalty"                = "Loyalty",
   "qualities_PhysicalHealth"        = "Physical health",
   "qualities_ProperBehavior"        = "Proper behavior",
-  "qualities_Strategic.Nepotism"     = "Strategic nepotism",
+  "qualities_StrategicNepotism"     = "Strategic nepotism",
   "qualities_Xenophobic"   = "Xenophobia",
   "qualities_AntiHonest" = "Dishonest",
   "qualities_AntiFairness" = "Unfair",
   "qualities_AntiDrugConsumption" = "No drug consumption",
-  "qualities_AntiCoerciveAuthority" = "No coercive authority"
+  "qualities_AntiCoerciveAuthority" = "No coercive authority",
+  leader.benefits_Fitness = 'Inclusive fitness benefit',
+  leader.benefits_Mating = 'Mating benefit',
+  leader.benefits_Other = 'Misc. non-material benefit',
+  leader.benefits_RiskHarmConflict = 'Reduced risk of harm',
+  leader.benefits_ResourceFood = 'Food benefit',
+  leader.benefits_ResourceOther = 'Material resources',
+  leader.benefits_SocialServices = 'Social services',
+  leader.benefits_SocialStatusReputation = 'Increased social status',
+  leader.benefits_Territory = 'Territory',
+  follower.benefits_Fitness = 'Inclusive fitness benefit',
+  follower.benefits_Mating = 'Mating benefit',
+  follower.benefits_Other = 'Misc. non-material benefit',
+  follower.benefits_RiskHarmConflict = 'Reduced risk of harm',
+  follower.benefits_ResourceFood = 'Food benefit',
+  follower.benefits_ResourceOther = 'Material resources',
+  follower.benefits_SocialServices = 'Social services',
+  follower.benefits_SocialStatusReputation = 'Increased social status',
+  follower.benefits_Territory = 'Territory',
+
+  leader.costs_Fitness = 'Inclusive fitness cost',
+  leader.costs_RiskHarmConflict = 'Increased risk of harm',
+  leader.costs_Other = 'Misc. non-material cost',
+  leader.costs_ResourceFood = 'Food cost',
+  leader.costs_ResourceOther = 'Loss of material resources',
+  leader.costs_SocialStatusReputation = 'Reduced social status',
+  leader.costs_Territory = 'Loss of territory',
+  leader.costs_Mating = 'Mating cost',
+  leader.costs_SocialServices = 'Loss of social services',
+  follower.costs_Fitness = 'Inclusive fitness cost',
+  follower.costs_RiskHarmConflict = 'Increased risk of harm',
+  follower.costs_Mating = 'Mating cost',
+  follower.costs_Other = 'Misc. non-material cost',
+  follower.costs_ResourceFood = 'Food cost',
+  follower.costs_ResourceOther = 'Loss of material resources',
+  follower.costs_SocialServices = 'Loss of social services',
+  follower.costs_SocialStatusReputation = 'Reduced social status',
+  follower.costs_Territory = 'Loss of territory'
 )
 
 # Write data --------------------------------------------------------------
