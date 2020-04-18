@@ -530,9 +530,6 @@ leader_text<-dplyr::select(d_final,
                            cs_ID:evidence_hooper_against,
                            dom_for:raw_text)
 
-
-
-
 # Rename text record data frame -------------------------------------------
 
 text_records <- d_raw.text
@@ -698,6 +695,30 @@ female_coauthor <- function(document_ID){
 }
 
 documents$female_coauthor <- map_lgl(documents$d_ID, female_coauthor)
+
+# Merge more culture-level data -------------------------------------------
+
+# number of text records for each culture
+tbl_ntr <- table(leader_text_original$c_culture_code)
+
+dfntr <- tibble(
+  "OWC Code" = names(tbl_ntr),
+  number_leader_records = as.numeric(tbl_ntr)
+)
+
+# get number of pages for PSF cultures only
+dfwc <-
+  read_excel("data-raw/WC_SummaryPublishedCollections_20180625.xlsx") %>%
+  dplyr::filter(`PSF eHRAF` == 'Yes') %>%
+  left_join(dfntr) %>%
+  dplyr::select(`OWC Code`, `N Pages eHRAF`, number_leader_records)
+
+leader_cult <-
+  leader_cult %>%
+  left_join(dfwc, by = c('c_culture_code' = 'OWC Code')) %>%
+  rename(
+    ehraf_pages = `N Pages eHRAF`
+  )
 
 # Convert factors to chars ------------------------------------------------
 
