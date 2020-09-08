@@ -117,7 +117,7 @@
 #'   \item{\code{prestige_family}}{double. Does the leader gain prestige or influence based on family level prestige? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
 #'   \item{\code{prestige_f.exp.success}}{double. Do followers have an expectation of success of the leader? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
 #'   \item{\code{prestige_likable}}{double. Is the leader likable? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
-#'   \item{\code{prestige_respected}}{double. Is the leader respected, admired, or held in high esteem? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against. }
+#'   \item{\code{prestige_respected}}{double. Is the leader respected, admired, or held in high esteem? Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against.}
 #'   \item{\code{doc_ID}}{character HRAF document ID.}
 #'   \item{\code{doc_field_date}}{character Date of field work from HRAF.}
 #'   \item{\code{doc_coverage_date}}{character Time period (year) document covers from HRAF.}
@@ -154,13 +154,13 @@
 #'   \item{\code{dom_totals}}{double. The sum of all dominance model variables from that codesheet, e.g., '1's + '-1's.}
 #'   \item{\code{prest_totals}}{double. The sum of all prestige model variables from that codesheet, e.g., '1's + '-1's.}
 #'   \item{\code{dom_anti_aggression}}{double. DESCR.}
-#'   \item{\code{dom_no_coercive_authority}}{double. DESCR.}
-#'   \item{\code{dom_non_dominant_personality}}{double. DESCR.}
+#'   \item{\code{dom_no_coercive_authority}}{double. The leader is unable to assert authority over unwilling others or unable to have power over followers. Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against.}
+#'   \item{\code{dom_non_dominant_personality}}{double. The leader has a personality that is not forceful or dominant. Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against.}
 #'   \item{\code{hooper_no_sanctioning}{double. The leader does not sanction against free-riding in collective activities.}
 #'   \item{\code{hooper_leaderless_large_group}{double. Followers do not prefer a leader in large, egalitarian groups during cooperative activities.}
 #'   \item{\code{hooper_egalitarian_large_group}{double. Leadership is absent among large cooperative groups.}
 #'   \item{\code{prestige_no_family_prestige}}{double. The leader does not gain prestige or influence based on family level prestige.}
-#'   \item{\code{prestige_unlikeable}}{double. The leader is unlikable.}
+#'   \item{\code{prestige_unlikeable}}{double. The leader is unlikable. Coded ‘1’ for evidence for, ‘0’ for no evidence, and ‘-1’ for evidence against.}
 #'   \item{\code{prestige_not_respected}}{double. The leader is not respected, admired, or held in high esteem.}
 #'   \item{\code{subsistence}{charachter. Recoded HRAF subsistence classification with the value lables of: “hunter-gatherers”, “pastoralists”, “horticulturalists”, “agriculturalists”, and “other”.}
 #'   \item{\code{region}{charachter. SCCS region classification using the following value lables: "Africa", "Circum-Mediterranean", "East Eurasia", "Insular Pacific", "North America", "South America"}

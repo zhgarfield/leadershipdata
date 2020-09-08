@@ -183,12 +183,12 @@ d.ct=merge(cultures, d.ct, by='c_culture_code', all=T)
 ####RECODING / MANAGING VARIABLES
 
 ## Doing some recoding of subsistence level
-d$subsistence2<-recode(d$c_subsistence_type, "'forager/food producers'= 'hunter gatherers'; 'foragers'='hunter gatherers';'horticulturalists'='horticulturalists'; 'intensive agriculturalists'='agriculturalists';'other'='other';'pastoral/agriculturalists'='pastoralists';'pastoralists'='pastoralists'")
-d.ct$subsistence2<-recode(d.ct$c_subsistence_type, "'forager/food producers'= 'hunter gatherers'; 'foragers'='hunter gatherers';'horticulturalists'='horticulturalists'; 'intensive agriculturalists'='agriculturalists';'other'='other';'pastoral/agriculturalists'='pastoralists';'pastoralists'='pastoralists'")
+d$subsistence2<-car::recode(d$c_subsistence_type, "'forager/food producers'= 'hunter gatherers'; 'foragers'='hunter gatherers';'horticulturalists'='horticulturalists'; 'intensive agriculturalists'='agriculturalists';'other'='other';'pastoral/agriculturalists'='pastoralists';'pastoralists'='pastoralists'")
+d.ct$subsistence2<-car::recode(d.ct$c_subsistence_type, "'forager/food producers'= 'hunter gatherers'; 'foragers'='hunter gatherers';'horticulturalists'='horticulturalists'; 'intensive agriculturalists'='agriculturalists';'other'='other';'pastoral/agriculturalists'='pastoralists';'pastoralists'='pastoralists'")
 #d.ct.old$subsistence2<-recode(d.ct.old$c_subsistence_type, "'forager/food producers'= 'hunter gatherers'; 'foragers'='hunter gatherers';'horticulturalists'='horticulturalists'; 'intensive agriculturalists'='agriculturalists';'other'='other';'pastoral/agriculturalists'='pastoralists';'pastoralists'='pastoralists'")
 
 
-d$region2<-recode(d$c_subregion, "'Amazon and Orinoco'='South America'; 'Arctic and Subarctic'='North America'; 'Australia'='Insular Pacific'; 'British Isles'='Circum-Mediterranean';
+d$region2<-car::recode(d$c_subregion, "'Amazon and Orinoco'='South America'; 'Arctic and Subarctic'='North America'; 'Australia'='Insular Pacific'; 'British Isles'='Circum-Mediterranean';
                    'Central Africa'= 'Africa'; 'Central America'='South America'; 'Central Andes'='South America'; 'East Asia'='East Eurasia'; 'Eastern Africa'='Circum-Mediterranean';
                    'Eastern South America'='South America'; 'Eastern Woodlands'='North America'; 'Maya Area'='North America'; 'Melanesia'='Insular Pacific'; 'Micronesia'='Insular Pacific';
                    'Middle East'='Circum-Mediterranean'; 'North Asia'='East Eurasia'; 'Northern Africa'='Africa'; 'Northern Mexico'='North America';
@@ -196,7 +196,7 @@ d$region2<-recode(d$c_subregion, "'Amazon and Orinoco'='South America'; 'Arctic 
                    'Polynesia'='Insular Pacific'; 'Scandinavia'='Circum-Mediterranean'; 'South Asia'='East Eurasia'; 'Southeast Asia'='Insular Pacific';
                    'Southeastern Europe'='Circum-Mediterranean'; 'Southern Africa'='Africa'; 'Southern South America'='South America'; 'Southwest and Basin'= 'North America'; 'Western Africa'='Africa'")
 
-d.ct$region2<-recode(d.ct$c_subregion, "'Amazon and Orinoco'='South America'; 'Arctic and Subarctic'='North America'; 'Australia'='Insular Pacific'; 'British Isles'='Circum-Mediterranean';
+d.ct$region2<-car::recode(d.ct$c_subregion, "'Amazon and Orinoco'='South America'; 'Arctic and Subarctic'='North America'; 'Australia'='Insular Pacific'; 'British Isles'='Circum-Mediterranean';
                      'Central Africa'= 'Africa'; 'Central America'='South America'; 'Central Andes'='South America'; 'East Asia'='East Eurasia'; 'Eastern Africa'='Circum-Mediterranean';
                      'Eastern South America'='South America'; 'Eastern Woodlands'='North America'; 'Maya Area'='North America'; 'Melanesia'='Insular Pacific'; 'Micronesia'='Insular Pacific';
                      'Middle East'='Circum-Mediterranean'; 'North Asia'='East Eurasia'; 'Northern Africa'='Africa'; 'Northern Mexico'='North America';
@@ -210,11 +210,11 @@ d.ct$subsistence2<-as.factor(d.ct$subsistence2)
 #### and 3 Western Africa coded as Africa that should be Circum Medeterainian (Dogon, Hause, Wolof)
 
 ###Recoding SCCS variables
-d.ct$settlement_fixity2<-recode(d.ct$V61, "''='NA'; 'Impermanent-periodically moved'='Impermanent-periodically moved'; 'Migratory'='Migratory'; 'Permanent'='Permanent'; 'Rotating among 2+ fixed'='Impermanent-periodically moved'; 'Seminomadic-fixed then migratory'='Seminomadic'; 'Semisedentary-fixed core, some migratory'='Semisedentary'")
+d.ct$settlement_fixity2<-car::recode(d.ct$V61, "''='NA'; 'Impermanent-periodically moved'='Impermanent-periodically moved'; 'Migratory'='Migratory'; 'Permanent'='Permanent'; 'Rotating among 2+ fixed'='Impermanent-periodically moved'; 'Seminomadic-fixed then migratory'='Seminomadic'; 'Semisedentary-fixed core, some migratory'='Semisedentary'")
 
-d.ct$com_size2<-recode(d.ct$V63, "''='NA'; '< 50'='< 99'; '1,000-4,999'='> 1,000'; '100-199'='100-199'; '200-399'='200-399'; '400-999'='400-999'; '50-99'='< 99'")
+d.ct$com_size2<-car::recode(d.ct$V63, "''='NA'; '< 50'='< 99'; '1,000-4,999'='> 1,000'; '100-199'='100-199'; '200-399'='200-399'; '400-999'='400-999'; '50-99'='< 99'")
 
-d.ct$pop_density2<-recode(d.ct$V64, "''='NA'; '< 1 person / 5 sq. mile'='≤ 1 person / 1-5 sq. mile'; '1 person / 1-5 sq. mile'='≤ 1 person / 1-5 sq. mile'; '1-25 persons / sq. mile'='1-25 persons / sq. mile'; '1-5 persons / sq. mile'='1-25 persons / sq. mile'; '101-500 persons / sq. mile'='101-500 persons / sq. mile'; '26-100 persons / sq. mile'='26-100 persons / sq. mile'; 'over 500 persons / sq. mile'='over 500 persons / sq. mile'")
+d.ct$pop_density2<-car::recode(d.ct$V64, "''='NA'; '< 1 person / 5 sq. mile'='≤ 1 person / 1-5 sq. mile'; '1 person / 1-5 sq. mile'='≤ 1 person / 1-5 sq. mile'; '1-25 persons / sq. mile'='1-25 persons / sq. mile'; '1-5 persons / sq. mile'='1-25 persons / sq. mile'; '101-500 persons / sq. mile'='101-500 persons / sq. mile'; '26-100 persons / sq. mile'='26-100 persons / sq. mile'; 'over 500 persons / sq. mile'='over 500 persons / sq. mile'")
 
 d.ct$V69[d.ct$V69==""]=NA
 d.ct$V69=factor(d.ct$V69)
